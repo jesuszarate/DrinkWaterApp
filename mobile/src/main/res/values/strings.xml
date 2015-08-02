@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DrinkWater</string>
+
+    <string name="add_water">+</string>
+    <string name="remove_water">-</string>
+    <string name="action_settings">Settings</string>
+</resources>
