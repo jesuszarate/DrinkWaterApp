@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Space;
 import android.widget.TextView;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.Settings.Settings;
+import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,27 +43,27 @@ public class DrinkWaterMain extends ActionBarActivity
         rootLayout.setOrientation(LinearLayout.VERTICAL);
         timer = new Timer();
 
-        // Total Water needed Section
-        LinearLayout totalWaterNeededSection= new LinearLayout(this);
-        final TextView totalWaterNeeded = new TextView(this);
-        totalWaterNeeded.setText("Total Water Needed");
-        totalWaterNeeded.setWidth(100);
-        final EditText waterNeededInput = new EditText(this);
-        totalWaterNeededSection.addView(totalWaterNeeded, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        totalWaterNeededSection.addView(waterNeededInput, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-
-        // Cup Size Section
-        LinearLayout cupSizeSection= new LinearLayout(this);
-        final TextView cupSize = new TextView(this);
-        cupSize.setText("Cup Size");
-        final EditText cupSizeInput = new EditText(this);
-        cupSize.setWidth(100);
-        cupSizeSection.addView(cupSize, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        cupSizeSection.addView(cupSizeInput, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+//        // Total Water needed Section
+//        LinearLayout totalWaterNeededSection= new LinearLayout(this);
+//        final TextView totalWaterNeeded = new TextView(this);
+//        totalWaterNeeded.setText("Total Water Needed");
+//        totalWaterNeeded.setWidth(100);
+//        final EditText waterNeededInput = new EditText(this);
+//        totalWaterNeededSection.addView(totalWaterNeeded, new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+//        totalWaterNeededSection.addView(waterNeededInput, new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+//
+//        // Cup Size Section
+//        LinearLayout cupSizeSection= new LinearLayout(this);
+//        final TextView cupSize = new TextView(this);
+//        cupSize.setText("Cup Size");
+//        final EditText cupSizeInput = new EditText(this);
+//        cupSize.setWidth(100);
+//        cupSizeSection.addView(cupSize, new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+//        cupSizeSection.addView(cupSizeInput, new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Submit Section
         LinearLayout submitSection = new LinearLayout(this);
@@ -74,9 +76,16 @@ public class DrinkWaterMain extends ActionBarActivity
             {
                 try
                 {
-                    Settings.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
-                    Settings.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
-                }catch (Exception e){}
+                    //Settings.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
+                    //Settings.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
+
+                    Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
+                    startActivity(intent);
+
+                }catch (Exception e)
+                {
+                    Log.e("Submit Button", e.toString());
+                }
             }
         });
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
@@ -128,11 +137,11 @@ public class DrinkWaterMain extends ActionBarActivity
             }
         });
 
-        rootLayout.addView(totalWaterNeededSection, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
-
-        rootLayout.addView(cupSizeSection, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+//        rootLayout.addView(totalWaterNeededSection, new LinearLayout.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+//
+//        rootLayout.addView(cupSizeSection, new LinearLayout.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         rootLayout.addView(submitSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 5));

@@ -69,11 +69,11 @@ public class TransparentLinearLayout extends LinearLayout
         {
             Paint polylinePaint = new Paint();
             polylinePaint.setStrokeWidth(5.0f);
-            polylinePaint.setColor(Color.parseColor("#88FFFF"));
+            polylinePaint.setColor(Color.parseColor("#55000000"));
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());
-            area.top = (int) (getHeight() - (WaterConsumption.getInstance().getTotalWaterConsumption()));
+            area.top = getPaddingTop();
             area.right = ((getWidth() - getPaddingRight()));
             area.bottom = ((getHeight() - getPaddingBottom()));
 
