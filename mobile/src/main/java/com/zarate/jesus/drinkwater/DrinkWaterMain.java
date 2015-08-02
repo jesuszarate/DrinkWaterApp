@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
+import com.zarate.jesus.drinkwater.Settings.Settings;
+
 import java.util.Timer;
 import java.util.TimerTask;
 

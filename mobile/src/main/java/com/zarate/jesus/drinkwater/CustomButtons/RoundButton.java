@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.view.View;
 
 import com.zarate.jesus.drinkwater.WaterConsumption;
@@ -20,25 +21,50 @@ public class RoundButton extends View
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.BLUE);
 
-        RectF _contentRect = new RectF();
-        _contentRect.left = getPaddingLeft();
-        _contentRect.top = getPaddingTop();
-        _contentRect.right = getWidth() - getPaddingRight();
-        _contentRect.bottom = getHeight() - getPaddingBottom();
+        RectF contentRect = new RectF();
+        contentRect.left = getPaddingLeft();
+        contentRect.top = getPaddingTop();
+        contentRect.right = getWidth() - getPaddingRight();
+        contentRect.bottom = getHeight() - getPaddingBottom();
 
-        canvas.drawOval(_contentRect, paint);
+        canvas.drawOval(contentRect, paint);
 
         paint.setColor(Color.WHITE);
-        paint.setTextSize(50);
+        paint.setTextSize(100);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         // TODO: FIX THE TEXT SO THAT THE TEXT CAN ALWAYS BE CENTERED
-        canvas.drawText(WaterConsumption.getInstance().getTotalWaterPercentage()+"", _contentRect.centerX() - 50,
-                (_contentRect.centerY()), paint);
+        String text = WaterConsumption.getInstance().getTotalWaterPercentage() + "";
 
+        canvas.drawText(text,
+                calculateCenterX(text, paint.getTextSize()),
+                calculateCenterY(text, paint.getTextSize()),
+                paint);
+    }
+
+    private float calculateCenterX(String s, float textSize)
+    {
+        float centerOfString = (float)Math.abs(s.length() / 3.8);
+        float centerOfText = (textSize * centerOfString);
+
+        int center = (getWidth() / 2);
+
+        return center - centerOfText;
+    }
+
+    private float calculateCenterY(String s, float textSize)
+    {
+        //float centerOfString = Math.abs(s.length() / 2);
+        float centerOfText = (float)(textSize/3);
+
+        int center = (getHeight() / 2);
+
+        return center + centerOfText;
     }
 }

@@ -1,5 +1,7 @@
 package com.zarate.jesus.drinkwater;
 
+import com.zarate.jesus.drinkwater.Settings.Settings;
+
 /**
  * Created by jesuszarate on 8/1/15.
  */
