@@ -1,8 +1,11 @@
 package com.zarate.jesus.drinkwater;
 
+import android.animation.StateListAnimator;
+import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,11 +33,13 @@ import java.util.TimerTask;
 public class DrinkWaterMain extends ActionBarActivity
 {
     NotificationCompat.Builder _mBuilder;
+    private ViewGroup buttonsContainer;
 
     // Sets an ID for the notification
     int mNotificationId = 001;
     Timer timer;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,8 +70,10 @@ public class DrinkWaterMain extends ActionBarActivity
 //        cupSizeSection.addView(cupSizeInput, new LinearLayout.LayoutParams(0,
 //                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
+
         // Submit Section
         LinearLayout submitSection = new LinearLayout(this);
+
         Button submit = new Button(this);
         submit.setText("Submit");
         submit.setOnClickListener(new View.OnClickListener()
@@ -76,9 +83,6 @@ public class DrinkWaterMain extends ActionBarActivity
             {
                 try
                 {
-                    //Settings.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
-                    //Settings.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
-
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
 
@@ -88,6 +92,7 @@ public class DrinkWaterMain extends ActionBarActivity
                 }
             }
         });
+
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         submitSection.addView(submit, new LinearLayout.LayoutParams(0,
@@ -98,10 +103,17 @@ public class DrinkWaterMain extends ActionBarActivity
         // Percentage indicator Section
         LinearLayout percentageSection = new LinearLayout(this);
         final RoundButton roundButton = new RoundButton(this);
+        roundButton.setBackgroundResource(R.drawable.oval_ripple);
+
+        //StateListAnimator listAnimator = new StateListAnimator();
+        //listAnimator.addState(new StateListAnimator(R.anim.button_elevation));
+        //roundButton.setStateListAnimator();
+        roundButton.setElevation(50);
+
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        percentageSection.addView(roundButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        percentageSection.addView(roundButton, new LinearLayout.LayoutParams(500,
+                500));
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
@@ -216,7 +228,15 @@ public class DrinkWaterMain extends ActionBarActivity
         public void run()
         {
             showNotification();
-            timer.schedule(new SwitchPlayerTask(), 150000);
+            timer.schedule(new SwitchPlayerTask(), getMinutes(15));
         }
+    }
+
+    private long getMinutes(int minutes)
+    {
+        int second = 1000;
+        int minute = 60 * second;
+
+        return minutes * minute;
     }
 }

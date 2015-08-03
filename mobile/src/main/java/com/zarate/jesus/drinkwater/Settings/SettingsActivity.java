@@ -30,7 +30,7 @@ public class SettingsActivity extends Activity
 
 
         // Total Water needed Section
-        LinearLayout totalWaterNeededSection= new LinearLayout(this);
+        LinearLayout totalWaterNeededSection = new LinearLayout(this);
         final TextView totalWaterNeeded = new TextView(this);
         totalWaterNeeded.setText("Total Water Needed");
         final EditText waterNeededInput = new EditText(this);
@@ -42,7 +42,7 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Cup Size Section
-        LinearLayout cupSizeSection= new LinearLayout(this);
+        LinearLayout cupSizeSection = new LinearLayout(this);
         final TextView cupSize = new TextView(this);
         cupSize.setText("Cup Size");
         final EditText cupSizeInput = new EditText(this);
@@ -63,9 +63,10 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-
-
-                }catch (Exception e)
+                    Settings.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
+                    Settings.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
+                    finish();
+                } catch (Exception e)
                 {
                     Log.e("Submit Button", e.toString());
                 }
@@ -81,7 +82,7 @@ public class SettingsActivity extends Activity
                 try
                 {
                     finish();
-                }catch (Exception e)
+                } catch (Exception e)
                 {
                     Log.e("Submit Button", e.toString());
                 }

@@ -33,13 +33,14 @@ public class RoundButton extends View
         contentRect.right = getWidth() - getPaddingRight();
         contentRect.bottom = getHeight() - getPaddingBottom();
 
-        canvas.drawOval(contentRect, paint);
+        //paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
+
+        //canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), 20, paint);
 
         paint.setColor(Color.WHITE);
         paint.setTextSize(100);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        // TODO: FIX THE TEXT SO THAT THE TEXT CAN ALWAYS BE CENTERED
         String text = WaterConsumption.getInstance().getTotalWaterPercentage() + "";
 
         canvas.drawText(text,
