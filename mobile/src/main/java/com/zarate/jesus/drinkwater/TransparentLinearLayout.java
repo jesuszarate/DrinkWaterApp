@@ -69,7 +69,7 @@ public class TransparentLinearLayout extends LinearLayout
         {
             Paint polylinePaint = new Paint();
             polylinePaint.setStrokeWidth(5.0f);
-            polylinePaint.setColor(Color.parseColor("#55000000"));
+            polylinePaint.setColor(Color.parseColor("#aa000000"));
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());
