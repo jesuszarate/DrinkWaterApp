@@ -20,6 +20,9 @@ import com.zarate.jesus.drinkwater.User;
  */
 public class SettingsActivity extends Activity
 {
+    EditText weightInput;
+    TextView totalWaterNeeded;
+    EditText waterNeededInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +39,7 @@ public class SettingsActivity extends Activity
         final TextView userWeight = new TextView(this);
         userWeight.setText("Weight");
         userWeight.setTextColor(Color.WHITE);
-        final EditText weightInput = new EditText(this);
+        weightInput = new EditText(this);
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
@@ -44,7 +47,11 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-                    User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString()));
+                    User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString())/2);
+
+                    if(!weightInput.getText().toString().isEmpty())
+                        waterNeededInput.setText(User.getInstance().getTotalWaterNeeded()+"");
+
                 }
                 catch (Exception e)
                 {
@@ -60,10 +67,10 @@ public class SettingsActivity extends Activity
 
         // Total Water needed Section
         LinearLayout totalWaterNeededSection = new LinearLayout(this);
-        final TextView totalWaterNeeded = new TextView(this);
+        totalWaterNeeded = new TextView(this);
         totalWaterNeeded.setText("Total Water Needed");
         totalWaterNeeded.setTextColor(Color.WHITE);
-        final EditText waterNeededInput = new EditText(this);
+        waterNeededInput = new EditText(this);
         waterNeededInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
