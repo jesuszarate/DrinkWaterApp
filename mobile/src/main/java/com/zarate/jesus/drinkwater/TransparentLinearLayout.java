@@ -52,13 +52,13 @@ public class TransparentLinearLayout extends LinearLayout
 
     public void addWater()
     {
-        if (WaterConsumption.getInstance().addWater(getHeight()))
+        if (User.getInstance().addWater(getHeight()))
             invalidate();
     }
 
     public void removeWater()
     {
-       if(WaterConsumption.getInstance().removeWater(getHeight()))
+       if(User.getInstance().removeWater(getHeight()))
            invalidate();
     }
 
@@ -69,7 +69,8 @@ public class TransparentLinearLayout extends LinearLayout
         {
             Paint polylinePaint = new Paint();
             polylinePaint.setStrokeWidth(5.0f);
-            polylinePaint.setColor(Color.parseColor("#aa000000"));
+            polylinePaint.setColor(Color.parseColor("#aa009788"));
+            //polylinePaint.setColor(Color.parseColor("#cc000000"));
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());

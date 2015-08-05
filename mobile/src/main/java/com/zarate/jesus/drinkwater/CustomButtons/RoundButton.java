@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.View;
 
+import com.zarate.jesus.drinkwater.User;
 import com.zarate.jesus.drinkwater.WaterConsumption;
 
 /**
@@ -41,7 +42,7 @@ public class RoundButton extends View
         paint.setTextSize(100);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        String text = WaterConsumption.getInstance().getTotalWaterPercentage() + "";
+        String text = User.getInstance().getTotalWaterPercentage() + "";
 
         canvas.drawText(text,
                 calculateCenterX(text, paint.getTextSize()),

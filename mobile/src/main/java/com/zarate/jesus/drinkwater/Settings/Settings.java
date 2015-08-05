@@ -12,54 +12,54 @@ public class Settings
     }
     private Settings (){}
 
-    private float reminderTime; // In seconds
-    private int totalWaterNeeded = 100;
-
-    private int cupSize = 20;
-    private MeasurementUnits measurementUnit;
-
-    private enum MeasurementUnits{
-        ENGLISH,
-        METRIC
-    }
-
-    public int getCupSize()
-    {
-        return cupSize;
-    }
-
-    public void setCupSize(int cupSize)
-    {
-        this.cupSize = cupSize;
-    }
-
-    public float getReminderTime()
-    {
-        return reminderTime;
-    }
-
-    public void setReminderTime(float reminderTime)
-    {
-        this.reminderTime = reminderTime;
-    }
-
-    public int getTotalWaterNeeded()
-    {
-        return totalWaterNeeded;
-    }
-
-    public void setTotalWaterNeeded(int totalWaterNeeded)
-    {
-        this.totalWaterNeeded = totalWaterNeeded;
-    }
-
-    public MeasurementUnits getMeasurementUnit()
-    {
-        return measurementUnit;
-    }
-
-    public void setMeasurementUnit(MeasurementUnits measurementUnit)
-    {
-        this.measurementUnit = measurementUnit;
-    }
+//    private float reminderTime; // In seconds
+//    private int totalWaterNeeded = 100;
+//
+//    private int cupSize = 20;
+//    private MeasurementUnits measurementUnit;
+//
+//    private enum MeasurementUnits{
+//        ENGLISH,
+//        METRIC
+//    }
+//
+//    public int getCupSize()
+//    {
+//        return cupSize;
+//    }
+//
+//    public void setCupSize(int cupSize)
+//    {
+//        this.cupSize = cupSize;
+//    }
+//
+//    public float getReminderTime()
+//    {
+//        return reminderTime;
+//    }
+//
+//    public void setReminderTime(float reminderTime)
+//    {
+//        this.reminderTime = reminderTime;
+//    }
+//
+//    public int getTotalWaterNeeded()
+//    {
+//        return totalWaterNeeded;
+//    }
+//
+//    public void setTotalWaterNeeded(int totalWaterNeeded)
+//    {
+//        this.totalWaterNeeded = totalWaterNeeded;
+//    }
+//
+//    public MeasurementUnits getMeasurementUnit()
+//    {
+//        return measurementUnit;
+//    }
+//
+//    public void setMeasurementUnit(MeasurementUnits measurementUnit)
+//    {
+//        this.measurementUnit = measurementUnit;
+//    }
 }

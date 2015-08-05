@@ -52,13 +52,13 @@ public class PaintWater extends LinearLayout
 
     public void addWater()
     {
-        if (WaterConsumption.getInstance().addWater(getHeight()))
+        if (User.getInstance().addWater(getHeight()))
             invalidate();
     }
 
     public void removeWater()
     {
-       if(WaterConsumption.getInstance().removeWater(getHeight()))
+       if(User.getInstance().removeWater(getHeight()))
            invalidate();
     }
 
@@ -73,7 +73,7 @@ public class PaintWater extends LinearLayout
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());
-            area.top = (int) (getHeight() - (WaterConsumption.getInstance().getTotalWaterConsumption()));
+            area.top = (getHeight() - (User.getInstance().getTotalWaterConsumption()));
             area.right = ((getWidth() - getPaddingRight()));
             area.bottom = ((getHeight() - getPaddingBottom()));
 
