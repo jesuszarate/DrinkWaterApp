@@ -8,18 +8,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.zarate.jesus.drinkwater.DrinkWaterMain"
+            android:name=".DrinkWaterMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.zarate.jesus.drinkwater.Settings.SettingsActivity"
+            android:name=".Settings.SettingsActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
     </application>
 

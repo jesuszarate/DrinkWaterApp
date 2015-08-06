@@ -1,24 +1,100 @@
 package com.zarate.jesus.drinkwater.CustomButtons;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
-import com.zarate.jesus.drinkwater.User;
-import com.zarate.jesus.drinkwater.WaterConsumption;
+import com.zarate.jesus.drinkwater.R;
 
 /**
  * Created by Jesus Zarate on 7/30/15.
  */
 public class RoundButton extends View
 {
+    RectF contentRect = new RectF();
+    int _radius;
+    private String text;
+    private int _textSize = -1;
+    private int _image = -1;
+    private boolean _imageSet = false;
+
     public RoundButton(Context context)
     {
         super(context);
+    }
+
+    public void set_image(int _image)
+    {
+        this._imageSet = true;
+        this._image = _image;
+    }
+
+    public void setText(int text)
+    {
+        this.text = getResources().getString(text);
+    }
+
+    public void setText(String text)
+    {
+        this.text = text;
+    }
+
+    public int getTextSize()
+    {
+        return _textSize;
+    }
+
+    public void setTextSize(int _textSize)
+    {
+        this._textSize = _textSize;
+    }
+
+    public interface OnClickListener
+    {
+        public void onClick(RoundButton v);
+    }
+
+    OnClickListener _onClickListener = null;
+
+    // The parameter is the interface type.
+    public void setOnClickListener(OnClickListener listener) {
+        _onClickListener = listener;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        float x = event.getX();
+        float y = event.getY();
+
+        // Check if click is inside the circle, by measuring the distance
+        //  between the center of the circle and the radius of the circle.
+        // -> If the point clicked is less than the radius of the circle
+        //    then it is a click.
+        float CircleCenterX = contentRect.centerX();
+        float CircleCenterY = contentRect.centerY();
+
+        // Distance formula-> sqrt((x1 - x2)^2 + (y1 - y2)^2)
+        float distance = (float) Math.sqrt(Math.pow(CircleCenterX - x, 2) + Math.pow(CircleCenterY - y, 2));
+        if (distance < _radius) {
+
+            if (_onClickListener != null) {
+                _onClickListener.onClick(this);
+            }
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -26,28 +102,44 @@ public class RoundButton extends View
     {
         super.onDraw(canvas);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.parseColor("#009788"));
 
-        RectF contentRect = new RectF();
+        contentRect = new RectF();
+
         contentRect.left = getPaddingLeft();
         contentRect.top = getPaddingTop();
         contentRect.right = getWidth() - getPaddingRight();
         contentRect.bottom = getHeight() - getPaddingBottom();
 
-        //paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
+        paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
 
-        //canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), 20, paint);
+        _radius = getHeight()/2;
+        canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), _radius, paint);
+
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         paint.setColor(Color.WHITE);
-        paint.setTextSize(100);
+
+        int textSize = this._textSize < 0 ? 32 : this._textSize;
+        paint.setTextSize(textSize);
+
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        String text = User.getInstance().getTotalWaterPercentage() + "";
+        if(text != null && !text.isEmpty())
+        {
+            canvas.drawText(text,
+                    calculateCenterX(text, paint.getTextSize()),
+                    calculateCenterY(text, paint.getTextSize()),
+                    paint);
+        }
 
-        canvas.drawText(text,
-                calculateCenterX(text, paint.getTextSize()),
-                calculateCenterY(text, paint.getTextSize()),
-                paint);
+        if(_imageSet)
+        {
+            Resources resources = getResources();
+            Bitmap bitmap = BitmapFactory.decodeResource(resources, _image);
+
+            canvas.drawBitmap(bitmap, contentRect.centerX() - 50, contentRect.centerY() - 50, paint);
+        }
     }
 
     private float calculateCenterX(String s, float textSize)

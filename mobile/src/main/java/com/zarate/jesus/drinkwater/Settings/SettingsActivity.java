@@ -2,16 +2,18 @@ package com.zarate.jesus.drinkwater.Settings;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
+import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.TransparentLinearLayout;
 import com.zarate.jesus.drinkwater.User;
 
@@ -30,16 +32,18 @@ public class SettingsActivity extends Activity
         super.onCreate(savedInstanceState);
 
         TransparentLinearLayout rootLayout = new TransparentLinearLayout(this);
-        rootLayout.setPadding(100, 300, 100, 300);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
+        LinearLayout emptySlot = new LinearLayout(this);
 
         // User's weight
         LinearLayout userWeightSection = new LinearLayout(this);
         final TextView userWeight = new TextView(this);
         userWeight.setText("Weight");
         userWeight.setTextColor(Color.WHITE);
+        userWeight.setTypeface(Typeface.DEFAULT_BOLD);
         weightInput = new EditText(this);
+        weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
@@ -47,13 +51,11 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-                    User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString())/2);
+                    User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString()) / 2);
 
-                    if(!weightInput.getText().toString().isEmpty())
-                        waterNeededInput.setText(User.getInstance().getTotalWaterNeeded()+"");
-
-                }
-                catch (Exception e)
+                    if (!weightInput.getText().toString().isEmpty())
+                        waterNeededInput.setText(User.getInstance().getTotalWaterNeeded() + "");
+                } catch (Exception e)
                 {
                     Log.e("Weight onFocusChange", e.toString());
                 }
@@ -61,7 +63,7 @@ public class SettingsActivity extends Activity
         });
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        params.setMargins(20, 20, 20, 0);
+        params.setMargins(20, 0, 20, 0);
         userWeightSection.addView(userWeight, params);
         userWeightSection.addView(weightInput, params);
 
@@ -69,8 +71,11 @@ public class SettingsActivity extends Activity
         LinearLayout totalWaterNeededSection = new LinearLayout(this);
         totalWaterNeeded = new TextView(this);
         totalWaterNeeded.setText("Total Water Needed");
+        totalWaterNeeded.setTypeface(Typeface.DEFAULT_BOLD);
+        totalWaterNeeded.setInputType(InputType.TYPE_CLASS_NUMBER);
         totalWaterNeeded.setTextColor(Color.WHITE);
         waterNeededInput = new EditText(this);
+        waterNeededInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         waterNeededInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
@@ -89,9 +94,10 @@ public class SettingsActivity extends Activity
         LinearLayout cupSizeSection = new LinearLayout(this);
         final TextView cupSize = new TextView(this);
         cupSize.setText("Cup Size");
+        cupSize.setTypeface(Typeface.DEFAULT_BOLD);
         cupSize.setTextColor(Color.WHITE);
         final EditText cupSizeInput = new EditText(this);
-        cupSize.setWidth(100);
+        cupSizeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
@@ -102,9 +108,11 @@ public class SettingsActivity extends Activity
         LinearLayout reminderFrequencySection = new LinearLayout(this);
         final TextView reminderFrequency = new TextView(this);
         reminderFrequency.setText("Reminder Frequency");
+        reminderFrequency.setTypeface(Typeface.DEFAULT_BOLD);
         reminderFrequency.setTextColor(Color.WHITE);
         final EditText reminderFrequencyInput = new EditText(this);
         reminderFrequency.setWidth(100);
+        reminderFrequency.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
@@ -114,20 +122,20 @@ public class SettingsActivity extends Activity
 
         // Submit/Cancel Section
         LinearLayout submitSection = new LinearLayout(this);
-        Button submitButton = new Button(this);
+        RoundButton submitButton = new RoundButton(this);
         submitButton.setText("Submit");
-        submitButton.setOnClickListener(new View.OnClickListener()
+        submitButton.setOnClickListener(new RoundButton.OnClickListener()
         {
             @Override
-            public void onClick(View v)
+            public void onClick(RoundButton v)
             {
                 try
                 {
-                    if(!weightInput.getText().toString().isEmpty())
+                    if (!weightInput.getText().toString().isEmpty())
                         User.getInstance().set_weight(Integer.parseInt(weightInput.getText().toString()));
-                    if(!cupSizeInput.getText().toString().isEmpty())
+                    if (!cupSizeInput.getText().toString().isEmpty())
                         User.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
-                    if(!waterNeededInput.getText().toString().isEmpty())
+                    if (!waterNeededInput.getText().toString().isEmpty())
                         User.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
 
                     finish();
@@ -137,22 +145,31 @@ public class SettingsActivity extends Activity
                 }
             }
         });
-        Button cancelButton = new Button(this);
-        cancelButton.setText("Cancel");
-        cancelButton.setOnClickListener(new View.OnClickListener()
+
+        RoundButton cancelButton = new RoundButton(this);
+        cancelButton.setOnClickListener(new RoundButton.OnClickListener()
         {
             @Override
-            public void onClick(View v)
+            public void onClick(RoundButton v)
             {
-                try
-                {
-                    finish();
-                } catch (Exception e)
-                {
-                    Log.e("Submit Button", e.toString());
-                }
+                finish();
             }
         });
+        cancelButton.setText("Cancel");
+//        //cancelButton.set_onClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                try
+//                {
+//                    finish();
+//                } catch (Exception e)
+//                {
+//                    Log.e("Submit Button", e.toString());
+//                }
+//            }
+//        });
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         submitSection.addView(cancelButton, new LinearLayout.LayoutParams(0,
@@ -165,6 +182,8 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Add to rootLayout
+        rootLayout.addView(emptySlot, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
         rootLayout.addView(userWeightSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
@@ -178,7 +197,7 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         rootLayout.addView(submitSection, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0, 5));
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         setContentView(rootLayout);
     }

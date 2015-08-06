@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 /**
  * Created by Jesus Zarate on 7/26/15.
