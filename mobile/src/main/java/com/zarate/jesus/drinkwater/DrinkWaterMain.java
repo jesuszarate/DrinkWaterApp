@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -57,10 +58,9 @@ public class DrinkWaterMain extends ActionBarActivity
         timer = new Timer();
 
         // Submit Section
-        LinearLayout submitSection = new LinearLayout(this);
+        LinearLayout settingSection = new LinearLayout(this);
 
         RoundButton settings = new RoundButton(this);
-        //settings.setText("Settings");
         settings.set_image(R.mipmap.ic_menu_preferences);
         settings.setOnClickListener(new View.OnClickListener()
         {
@@ -79,13 +79,13 @@ public class DrinkWaterMain extends ActionBarActivity
             }
         });
 
-        submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+        settingSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+        settingSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+        settingSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        submitSection.addView(settings, new LinearLayout.LayoutParams(0,
+        settingSection.addView(settings, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         LinearLayout emptySpace = new LinearLayout(this);
@@ -111,13 +111,16 @@ public class DrinkWaterMain extends ActionBarActivity
         RoundButton AddButton = new RoundButton(this);
         RoundButton RemoveButton = new RoundButton(this);
 
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 5));
         WaterButtonSection.addView(RemoveButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
         WaterButtonSection.addView(AddButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
 
         AddButton.setText(R.string.add_water);
         AddButton.setTextSize(100);
@@ -147,7 +150,10 @@ public class DrinkWaterMain extends ActionBarActivity
             }
         });
 
-        rootLayout.addView(submitSection, new LinearLayout.LayoutParams(
+        rootLayout.addView(new LinearLayout(this), new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
+
+        rootLayout.addView(settingSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 3));
 
         rootLayout.addView(emptySpace, new LinearLayout.LayoutParams(

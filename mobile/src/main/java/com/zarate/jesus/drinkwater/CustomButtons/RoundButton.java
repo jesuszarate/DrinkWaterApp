@@ -1,5 +1,6 @@
 package com.zarate.jesus.drinkwater.CustomButtons;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,7 +12,9 @@ import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.media.Image;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,7 @@ public class RoundButton extends View
     public RoundButton(Context context)
     {
         super(context);
+
         this.setBackgroundResource(R.drawable.oval_ripple);
 
     }
@@ -145,6 +149,13 @@ public class RoundButton extends View
         }
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        widthMeasureSpec  = heightMeasureSpec;
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
     private float calculateCenterX(String s, float textSize)
     {
         float centerOfString = (float)Math.abs(s.length() / 3.8);
@@ -158,7 +169,7 @@ public class RoundButton extends View
     private float calculateCenterY(String s, float textSize)
     {
         //float centerOfString = Math.abs(s.length() / 2);
-        float centerOfText = (float)(textSize/3);
+        float centerOfText = (textSize/3);
 
         int center = (getHeight() / 2);
 

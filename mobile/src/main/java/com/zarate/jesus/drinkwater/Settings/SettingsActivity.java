@@ -159,15 +159,15 @@ public class SettingsActivity extends Activity
         cancelButton.setText("Cancel");
 
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                ViewGroup.LayoutParams.MATCH_PARENT, 2));
         submitSection.addView(cancelButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 3));
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
         submitSection.addView(submitButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 3));
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
 
         // Add to rootLayout
         rootLayout.addView(emptySlot, new LinearLayout.LayoutParams(
