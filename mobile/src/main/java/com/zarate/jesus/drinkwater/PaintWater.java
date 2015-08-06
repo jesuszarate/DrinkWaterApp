@@ -69,7 +69,8 @@ public class PaintWater extends LinearLayout
         {
             Paint polylinePaint = new Paint();
             polylinePaint.setStrokeWidth(5.0f);
-            polylinePaint.setColor(Color.parseColor("#88FFFF"));
+            polylinePaint.setColor(Color.parseColor("#80DEEA"));
+            //polylinePaint.setColor(Color.parseColor("#88FFFF"));
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());

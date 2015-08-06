@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -124,10 +125,10 @@ public class SettingsActivity extends Activity
         LinearLayout submitSection = new LinearLayout(this);
         RoundButton submitButton = new RoundButton(this);
         submitButton.setText("Submit");
-        submitButton.setOnClickListener(new RoundButton.OnClickListener()
+        submitButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(RoundButton v)
+            public void onClick(View v)
             {
                 try
                 {
@@ -147,29 +148,16 @@ public class SettingsActivity extends Activity
         });
 
         RoundButton cancelButton = new RoundButton(this);
-        cancelButton.setOnClickListener(new RoundButton.OnClickListener()
+        cancelButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(RoundButton v)
+            public void onClick(View v)
             {
                 finish();
             }
         });
         cancelButton.setText("Cancel");
-//        //cancelButton.set_onClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                try
-//                {
-//                    finish();
-//                } catch (Exception e)
-//                {
-//                    Log.e("Submit Button", e.toString());
-//                }
-//            }
-//        });
+
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         submitSection.addView(cancelButton, new LinearLayout.LayoutParams(0,

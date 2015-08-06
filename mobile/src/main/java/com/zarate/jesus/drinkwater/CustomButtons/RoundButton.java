@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.zarate.jesus.drinkwater.R;
@@ -33,6 +34,8 @@ public class RoundButton extends View
     public RoundButton(Context context)
     {
         super(context);
+        this.setBackgroundResource(R.drawable.oval_ripple);
+
     }
 
     public void set_image(int _image)
@@ -63,7 +66,7 @@ public class RoundButton extends View
 
     public interface OnClickListener
     {
-        public void onClick(RoundButton v);
+        public void onClick(RoundButton v, MotionEvent event);
     }
 
     OnClickListener _onClickListener = null;
@@ -91,7 +94,7 @@ public class RoundButton extends View
         if (distance < _radius) {
 
             if (_onClickListener != null) {
-                _onClickListener.onClick(this);
+                _onClickListener.onClick(this, event);
             }
         }
         return super.onTouchEvent(event);
@@ -114,7 +117,7 @@ public class RoundButton extends View
         paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
 
         _radius = getHeight()/2;
-        canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), _radius, paint);
+        //canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), _radius, paint);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 

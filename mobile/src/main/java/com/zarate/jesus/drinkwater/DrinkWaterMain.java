@@ -4,6 +4,10 @@ import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -11,9 +15,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.Space;
 
@@ -31,6 +36,7 @@ import java.util.TimerTask;
 public class DrinkWaterMain extends ActionBarActivity
 {
     NotificationCompat.Builder _mBuilder;
+    AlphaAnimation _buttonClick = new AlphaAnimation(1F, 0.3F);
 
     // Sets an ID for the notification
     int mNotificationId = 001;
@@ -42,6 +48,10 @@ public class DrinkWaterMain extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#009788")));
+        actionBar.show();
+
         final PaintWater rootLayout = new PaintWater(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
         timer = new Timer();
@@ -52,10 +62,10 @@ public class DrinkWaterMain extends ActionBarActivity
         RoundButton settings = new RoundButton(this);
         //settings.setText("Settings");
         settings.set_image(R.mipmap.ic_menu_preferences);
-        settings.setOnClickListener(new RoundButton.OnClickListener()
+        settings.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(RoundButton v)
+            public void onClick(View v)
             {
                 try
                 {
@@ -97,13 +107,17 @@ public class DrinkWaterMain extends ActionBarActivity
         LinearLayout emptySpace1 = new LinearLayout(this);
 
         // Water Buttons
-        LinearLayout WaterButtonSection= new LinearLayout(this);
+        LinearLayout WaterButtonSection = new LinearLayout(this);
         RoundButton AddButton = new RoundButton(this);
         RoundButton RemoveButton = new RoundButton(this);
+
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
         WaterButtonSection.addView(RemoveButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
         WaterButtonSection.addView(AddButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(200,200));
 
         AddButton.setText(R.string.add_water);
         AddButton.setTextSize(100);
@@ -120,11 +134,14 @@ public class DrinkWaterMain extends ActionBarActivity
             }
         });
 
+
         RemoveButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                v.startAnimation(_buttonClick);
+
                 rootLayout.removeWater();
                 roundButton.invalidate();
             }
@@ -174,31 +191,6 @@ public class DrinkWaterMain extends ActionBarActivity
         _mBuilder.setContentIntent(resultPendingIntent);
         // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, _mBuilder.build());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_drink_water, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     class SwitchPlayerTask extends TimerTask
