@@ -21,6 +21,7 @@ import com.zarate.jesus.drinkwater.R;
 import com.zarate.jesus.drinkwater.TransparentLinearLayout;
 import com.zarate.jesus.drinkwater.User;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -117,14 +118,16 @@ public class SettingsActivity extends Activity
         reminderFrequency.setTypeface(Typeface.DEFAULT_BOLD);
         reminderFrequency.setTextColor(Color.WHITE);
         final Spinner reminderSpinner = new Spinner(this);
+
         ArrayAdapter<String> adapter;
-
         String[] arraySpinner = getResources().getStringArray(R.array.time);
-
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
-
         reminderSpinner.setAdapter(adapter);
+
+        HashMap<Integer, Integer> map = User.getInstance().getTimeLengths();
+        int position = map.get(User.getInstance().getReminderTime());
+        reminderSpinner.setSelection(position, true);
 
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);

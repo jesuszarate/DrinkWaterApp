@@ -40,7 +40,7 @@ import java.util.TimerTask;
 public class DrinkWaterMain extends Activity
 {
     // Last drink
-    String _lastTime = "nothing";
+    String _lastTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
 
     NotificationCompat.Builder _mBuilder;
     AlphaAnimation _buttonClick = new AlphaAnimation(1F, 0.3F);
@@ -176,13 +176,13 @@ public class DrinkWaterMain extends Activity
 
     private void showNotification()
     {
-        String current = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        String current = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
         _mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
                         .setContentTitle("Drink Water")
-                        .setContentText("Last time: " + _lastTime + " Now "
-                                + current + "Drinking water is good for your health");
+                        .setContentText("Last time: " + _lastTime + " Now " + current);
+                                //+ current + "Drinking water is good for your health");
 
         _lastTime = current;
 
@@ -220,7 +220,6 @@ public class DrinkWaterMain extends Activity
     {
         int second = 1000;
         int minute = 60 * second;
-        int what = minute * minutes;
         return minutes * minute;
     }
 }

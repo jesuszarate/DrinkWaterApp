@@ -1,5 +1,8 @@
 package com.zarate.jesus.drinkwater;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Jesus Zarate on 7/25/15.
  */
@@ -12,6 +15,12 @@ public class User
     private User()
     {}
 
+    private HashMap<Integer, Integer> timeLengths = new HashMap<Integer, Integer>(){
+        {
+            put(5, 0); put(10, 1); put(15, 2); put(20, 3); put(25, 4); put(30, 5);
+            put(35, 6); put(40, 7); put(45, 8); put(50, 9); put(55, 10); put(60, 11);
+        }
+    };
     private String _name;
     private double _weight;
     private String _height;
@@ -36,6 +45,11 @@ public class User
         Low,
         Moderate,
         High
+    }
+
+    public HashMap<Integer, Integer> getTimeLengths()
+    {
+        return timeLengths;
     }
 
     public ActivityLevel get_activityLevel()
