@@ -9,14 +9,19 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Space;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
+import com.zarate.jesus.drinkwater.R;
 import com.zarate.jesus.drinkwater.TransparentLinearLayout;
 import com.zarate.jesus.drinkwater.User;
+
+import java.util.Objects;
 
 /**
  * Created by Jesus Zarate on 8/1/15.
@@ -111,14 +116,22 @@ public class SettingsActivity extends Activity
         reminderFrequency.setText("Reminder Frequency");
         reminderFrequency.setTypeface(Typeface.DEFAULT_BOLD);
         reminderFrequency.setTextColor(Color.WHITE);
-        final EditText reminderFrequencyInput = new EditText(this);
-        reminderFrequency.setWidth(100);
-        reminderFrequency.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        final Spinner reminderSpinner = new Spinner(this);
+        ArrayAdapter<String> adapter;
+
+        String[] arraySpinner = getResources().getStringArray(R.array.time);
+
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+
+        reminderSpinner.setAdapter(adapter);
+
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
         reminderFrequencySection.addView(reminderFrequency, params);
-        reminderFrequencySection.addView(reminderFrequencyInput, params);
+        reminderFrequencySection.addView(new View(this), params);
+        reminderFrequencySection.addView(reminderSpinner, params);
 
 
         // Submit/Cancel Section
@@ -132,12 +145,15 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-                    if (!weightInput.getText().toString().isEmpty())
+                    if (weightInput != null && !weightInput.getText().toString().isEmpty())
                         User.getInstance().set_weight(Integer.parseInt(weightInput.getText().toString()));
-                    if (!cupSizeInput.getText().toString().isEmpty())
+                    if (cupSizeInput != null && !cupSizeInput.getText().toString().isEmpty())
                         User.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
-                    if (!waterNeededInput.getText().toString().isEmpty())
+                    if (waterNeededInput != null && !waterNeededInput.getText().toString().isEmpty())
                         User.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
+
+                    int time = Integer.parseInt(reminderSpinner.getSelectedItem().toString());
+                    User.getInstance().setReminderTime(time);
 
                     finish();
                 } catch (Exception e)
@@ -163,7 +179,7 @@ public class SettingsActivity extends Activity
         submitSection.addView(cancelButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.MATCH_PARENT, 3));
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 3));
+                ViewGroup.LayoutParams.MATCH_PARENT, 4));
         submitSection.addView(submitButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.MATCH_PARENT, 3));
         submitSection.addView(new Space(this), new LinearLayout.LayoutParams(0,

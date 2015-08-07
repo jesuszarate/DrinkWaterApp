@@ -1,6 +1,7 @@
 package com.zarate.jesus.drinkwater;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -27,6 +28,8 @@ import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,8 +37,11 @@ import java.util.TimerTask;
 /**
  * TODO:
  */
-public class DrinkWaterMain extends ActionBarActivity
+public class DrinkWaterMain extends Activity
 {
+    // Last drink
+    String _lastTime = "nothing";
+
     NotificationCompat.Builder _mBuilder;
     AlphaAnimation _buttonClick = new AlphaAnimation(1F, 0.3F);
 
@@ -49,9 +55,9 @@ public class DrinkWaterMain extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#009788")));
-        actionBar.show();
+//        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#009788")));
+//        actionBar.show();
 
         final PaintWater rootLayout = new PaintWater(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
@@ -71,7 +77,6 @@ public class DrinkWaterMain extends ActionBarActivity
                 {
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
-
                 } catch (Exception e)
                 {
                     Log.e("Settings Button", e.toString());
@@ -112,11 +117,11 @@ public class DrinkWaterMain extends ActionBarActivity
         RoundButton RemoveButton = new RoundButton(this);
 
         WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 5));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 3));
         WaterButtonSection.addView(RemoveButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 10));
         WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 20));
         WaterButtonSection.addView(AddButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 10));
         WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
@@ -136,7 +141,6 @@ public class DrinkWaterMain extends ActionBarActivity
                 roundButton.invalidate();
             }
         });
-
 
         RemoveButton.setOnClickListener(new View.OnClickListener()
         {
@@ -167,16 +171,20 @@ public class DrinkWaterMain extends ActionBarActivity
 
         setContentView(rootLayout);
 
-        timer.schedule(new SwitchPlayerTask(), getMinutes(15));
+        timer.schedule(new SwitchPlayerTask(), getMinutes(User.getInstance().getReminderTime()));
     }
 
     private void showNotification()
     {
+        String current = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         _mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
                         .setContentTitle("Drink Water")
-                        .setContentText("Drinking water is good for your health");
+                        .setContentText("Last time: " + _lastTime + " Now "
+                                + current + "Drinking water is good for your health");
+
+        _lastTime = current;
 
         Intent resultIntent = new Intent(this, DrinkWaterMain.class);
 
@@ -204,7 +212,7 @@ public class DrinkWaterMain extends ActionBarActivity
         public void run()
         {
             showNotification();
-            timer.schedule(new SwitchPlayerTask(), getMinutes(15));
+            timer.schedule(new SwitchPlayerTask(), getMinutes(User.getInstance().getReminderTime()));
         }
     }
 
@@ -212,7 +220,7 @@ public class DrinkWaterMain extends ActionBarActivity
     {
         int second = 1000;
         int minute = 60 * second;
-
+        int what = minute * minutes;
         return minutes * minute;
     }
 }

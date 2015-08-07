@@ -4,4 +4,19 @@
     <string name="add_water">+</string>
     <string name="remove_water">-</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="time">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+    </string-array>
 </resources>

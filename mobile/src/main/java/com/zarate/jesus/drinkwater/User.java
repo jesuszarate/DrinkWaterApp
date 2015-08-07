@@ -1,7 +1,5 @@
 package com.zarate.jesus.drinkwater;
 
-import com.zarate.jesus.drinkwater.Settings.Settings;
-
 /**
  * Created by Jesus Zarate on 7/25/15.
  */
@@ -21,7 +19,7 @@ public class User
     private double TotalWaterPercentage = 0;
     private double RemainingWaterConsumption = 0;
     private double _percentagePortion = 0;
-    private float reminderTime; // In seconds
+    private int reminderTime = 15; // In minutes
     private int totalWaterNeeded = 100;
 
     private int cupSize = 20;
@@ -141,12 +139,12 @@ public class User
         this.cupSize = cupSize;
     }
 
-    public float getReminderTime()
+    public int getReminderTime()
     {
         return reminderTime;
     }
 
-    public void setReminderTime(float reminderTime)
+    public void setReminderTime(int reminderTime)
     {
         this.reminderTime = reminderTime;
     }

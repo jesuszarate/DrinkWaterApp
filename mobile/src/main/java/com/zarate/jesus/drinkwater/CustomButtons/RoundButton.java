@@ -1,6 +1,5 @@
 package com.zarate.jesus.drinkwater.CustomButtons;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,17 +7,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
-import android.media.Image;
-import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import com.zarate.jesus.drinkwater.R;
 
@@ -168,7 +160,6 @@ public class RoundButton extends View
 
     private float calculateCenterY(String s, float textSize)
     {
-        //float centerOfString = Math.abs(s.length() / 2);
         float centerOfText = (textSize/3);
 
         int center = (getHeight() / 2);
