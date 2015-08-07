@@ -29,9 +29,7 @@ public class RoundButton extends View
     public RoundButton(Context context)
     {
         super(context);
-
         this.setBackgroundResource(R.drawable.oval_ripple);
-
     }
 
     public void set_image(int _image)

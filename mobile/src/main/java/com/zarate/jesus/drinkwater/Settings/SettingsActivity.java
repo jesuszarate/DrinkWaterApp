@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
@@ -50,6 +51,7 @@ public class SettingsActivity extends Activity
         userWeight.setTextColor(Color.WHITE);
         userWeight.setTypeface(Typeface.DEFAULT_BOLD);
         weightInput = new EditText(this);
+        weightInput.setText(User.getInstance().get_weight() + "");
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
@@ -58,10 +60,15 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-                    User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString()) / 2);
+                    String currentWeight = User.getInstance().get_weight() + "";
+                    String w = weightInput.getText().toString();
+                    if (!currentWeight.equals(weightInput.getText()+""))
+                    {
+                        User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString()) / 2);
 
-                    if (!weightInput.getText().toString().isEmpty())
-                        waterNeededInput.setText(User.getInstance().getTotalWaterNeeded() + "");
+                        if (!weightInput.getText().toString().isEmpty())
+                            waterNeededInput.setText(User.getInstance().getTotalWaterNeeded() + "");
+                    }
                 } catch (Exception e)
                 {
                     Log.e("Weight onFocusChange", e.toString());
@@ -82,15 +89,8 @@ public class SettingsActivity extends Activity
         totalWaterNeeded.setInputType(InputType.TYPE_CLASS_NUMBER);
         totalWaterNeeded.setTextColor(Color.WHITE);
         waterNeededInput = new EditText(this);
+        waterNeededInput.setText(User.getInstance().getTotalWaterNeeded() + "");
         waterNeededInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        waterNeededInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus)
-            {
-
-            }
-        });
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
@@ -104,6 +104,7 @@ public class SettingsActivity extends Activity
         cupSize.setTypeface(Typeface.DEFAULT_BOLD);
         cupSize.setTextColor(Color.WHITE);
         final EditText cupSizeInput = new EditText(this);
+        cupSizeInput.setText(User.getInstance().getCupSize() + "");
         cupSizeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
@@ -133,9 +134,8 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
         reminderFrequencySection.addView(reminderFrequency, params);
-        reminderFrequencySection.addView(new View(this), params);
+        reminderFrequencySection.addView(new Space(this), params);
         reminderFrequencySection.addView(reminderSpinner, params);
-
 
         // Submit/Cancel Section
         LinearLayout submitSection = new LinearLayout(this);

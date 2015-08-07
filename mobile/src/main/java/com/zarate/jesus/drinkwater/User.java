@@ -10,38 +10,56 @@ public class User
 {
     private static User instance = new User();
 
-    public static User getInstance(){return instance;}
+    public static User getInstance()
+    {
+        return instance;
+    }
 
     private User()
-    {}
+    {
+    }
 
-    private HashMap<Integer, Integer> timeLengths = new HashMap<Integer, Integer>(){
+    private HashMap<Integer, Integer> timeLengths = new HashMap<Integer, Integer>()
+    {
         {
-            put(5, 0); put(10, 1); put(15, 2); put(20, 3); put(25, 4); put(30, 5);
-            put(35, 6); put(40, 7); put(45, 8); put(50, 9); put(55, 10); put(60, 11);
+            put(5, 0);
+            put(10, 1);
+            put(15, 2);
+            put(20, 3);
+            put(25, 4);
+            put(30, 5);
+            put(35, 6);
+            put(40, 7);
+            put(45, 8);
+            put(50, 9);
+            put(55, 10);
+            put(60, 11);
         }
     };
+
     private String _name;
-    private double _weight;
-    private String _height;
+    private int _weight = 0;
+    private double _height = 0;
     private int TotalWaterConsumption = 0;
     private double TotalWaterPercentage = 0;
     private double RemainingWaterConsumption = 0;
     private double _percentagePortion = 0;
     private int reminderTime = 15; // In minutes
-    private int totalWaterNeeded = 100;
+    private int totalWaterNeeded = 64;
 
     private int cupSize = 20;
     private MeasurementUnits measurementUnit;
 
-    private enum MeasurementUnits{
+    private enum MeasurementUnits
+    {
         ENGLISH,
         METRIC
     }
 
     private ActivityLevel _activityLevel = ActivityLevel.Moderate;
 
-    private enum ActivityLevel{
+    private enum ActivityLevel
+    {
         Low,
         Moderate,
         High
@@ -72,22 +90,22 @@ public class User
         this._name = _name;
     }
 
-    public double get_weight()
+    public int get_weight()
     {
         return _weight;
     }
 
-    public void set_weight(double _weight)
+    public void set_weight(int _weight)
     {
         this._weight = _weight;
     }
 
-    public String get_height()
+    public double get_height()
     {
         return _height;
     }
 
-    public void set_height(String _height)
+    public void set_height(double _height)
     {
         this._height = _height;
     }
@@ -117,22 +135,17 @@ public class User
     {
         int part = (getTotalWaterNeeded() / getCupSize());
         int amount = height / part;
-        _percentagePortion = User.getInstance().getTotalWaterNeeded()/ part;
+        _percentagePortion = User.getInstance().getTotalWaterNeeded() / part;
         TotalWaterPercentage += _percentagePortion;
-
-        //if ((TotalWaterConsumption + amount) < height)
-        {
-            TotalWaterConsumption += amount;
-            return true;
-        }
-        //return false;
+        TotalWaterConsumption += amount;
+        return true;
     }
 
-    public boolean removeWater(int height){
+    public boolean removeWater(int height)
+    {
         int part = (getTotalWaterNeeded() / getCupSize());
         int amount = height / part;
         _percentagePortion = User.getInstance().getTotalWaterNeeded() / part;
-
 
         if ((TotalWaterConsumption) > 0)
         {
