@@ -26,8 +26,10 @@ import android.widget.Space;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
+import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
@@ -54,10 +56,6 @@ public class DrinkWaterMain extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-//        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#009788")));
-//        actionBar.show();
 
         final PaintWater rootLayout = new PaintWater(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
@@ -174,6 +172,22 @@ public class DrinkWaterMain extends Activity
         timer.schedule(new SwitchPlayerTask(), getMinutes(User.getInstance().getReminderTime()));
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        File filesDir = getFilesDir();
+        SavingAndLoading.LoadState(filesDir);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        File filesDir = getFilesDir();
+        SavingAndLoading.SaveState(filesDir);
+    }
+
     private void showNotification()
     {
         String current = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -222,4 +236,5 @@ public class DrinkWaterMain extends Activity
         int minute = 60 * second;
         return minutes * minute;
     }
+
 }

@@ -1,22 +1,30 @@
 package com.zarate.jesus.drinkwater;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Jesus Zarate on 7/25/15.
  */
 public class User
 {
-    private static User instance = new User();
+    private static User _instance = null;
 
     public static User getInstance()
     {
-        return instance;
+        if(_instance == null)
+        {
+            _instance = new User();
+        }
+        return _instance;
     }
 
     private User()
     {
+    }
+
+    public static void setInstance(User user)
+    {
+        _instance = user;
     }
 
     private HashMap<Integer, Integer> timeLengths = new HashMap<Integer, Integer>()
