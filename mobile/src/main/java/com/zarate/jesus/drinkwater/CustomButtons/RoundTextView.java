@@ -50,6 +50,20 @@ public class RoundTextView extends View
                 paint);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        if(widthMeasureSpec > heightMeasureSpec)
+            widthMeasureSpec = heightMeasureSpec;
+        else
+            heightMeasureSpec = widthMeasureSpec;
+
+        widthMeasureSpec = widthMeasureSpec - 100;
+        heightMeasureSpec = heightMeasureSpec - 100;
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
     private float calculateCenterX(String s, float textSize)
     {
         float centerOfString = (float)Math.abs(s.length() / 3.8);

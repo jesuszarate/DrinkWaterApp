@@ -19,9 +19,11 @@ import android.widget.TimePicker;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
+import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.TransparentLinearLayout;
 import com.zarate.jesus.drinkwater.User;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -207,5 +209,21 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         setContentView(rootLayout);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        File filesDir = getFilesDir();
+        SavingAndLoading.SaveState(filesDir);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        File filesDir = getFilesDir();
+        SavingAndLoading.LoadState(filesDir);
     }
 }

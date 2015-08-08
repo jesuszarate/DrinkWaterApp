@@ -19,4 +19,7 @@
         <item>55</item>
         <item>60</item>
     </string-array>
+    <string name="title_activity_graph">GraphActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

@@ -5,19 +5,10 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -65,7 +56,7 @@ public class DrinkWaterMain extends Activity
         LinearLayout settingSection = new LinearLayout(this);
 
         RoundButton settings = new RoundButton(this);
-        settings.set_image(R.mipmap.ic_menu_preferences);
+        settings.setImage(R.mipmap.ic_menu_preferences);
         settings.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -81,7 +72,6 @@ public class DrinkWaterMain extends Activity
                 }
             }
         });
-
         settingSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         settingSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
@@ -91,7 +81,21 @@ public class DrinkWaterMain extends Activity
         settingSection.addView(settings, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
-        LinearLayout emptySpace = new LinearLayout(this);
+        // Analysis Section
+        LinearLayout analysisSection = new LinearLayout(this);
+        RoundButton analysisButton = new RoundButton(this);
+        analysisButton.setText("Analysis");
+        analysisButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent analysisIntent = new Intent(DrinkWaterMain.this, GraphActivity.class);
+                startActivity(analysisIntent);
+            }
+        });
+        analysisSection.addView(analysisButton, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Percentage indicator Section
         LinearLayout percentageSection = new LinearLayout(this);
@@ -101,8 +105,8 @@ public class DrinkWaterMain extends Activity
 
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        percentageSection.addView(roundButton, new LinearLayout.LayoutParams(700,
-                700));
+        percentageSection.addView(roundButton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
@@ -158,7 +162,7 @@ public class DrinkWaterMain extends Activity
         rootLayout.addView(settingSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 3));
 
-        rootLayout.addView(emptySpace, new LinearLayout.LayoutParams(
+        rootLayout.addView(analysisSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 5));
 
         rootLayout.addView(percentageSection, new LinearLayout.LayoutParams(
