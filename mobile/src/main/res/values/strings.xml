@@ -21,5 +21,7 @@
     </string-array>
     <string name="title_activity_graph">GraphActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+
 </resources>
