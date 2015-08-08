@@ -94,6 +94,8 @@ public class DrinkWaterMain extends Activity
                 startActivity(analysisIntent);
             }
         });
+        analysisSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         analysisSection.addView(analysisButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
