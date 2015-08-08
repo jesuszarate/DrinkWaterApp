@@ -5,14 +5,18 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Space;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
@@ -112,24 +116,30 @@ public class DrinkWaterMain extends Activity
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
-        // Empty space
-        LinearLayout emptySpace1 = new LinearLayout(this);
-
         // Water Buttons
         LinearLayout WaterButtonSection = new LinearLayout(this);
         RoundButton AddButton = new RoundButton(this);
         RoundButton RemoveButton = new RoundButton(this);
 
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 3));
+        View view = new View(this);
+        //view.setBackgroundColor(Color.BLACK);
+        WaterButtonSection.addView(view, new LinearLayout.LayoutParams(0,
+        ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
         WaterButtonSection.addView(RemoveButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 20));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
+        View view1 = new View(this);
+        //view1.setBackgroundColor(Color.BLACK);
+        WaterButtonSection.addView(view1, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         WaterButtonSection.addView(AddButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
-        WaterButtonSection.addView(new View(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 10));
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
+        View view2 = new View(this);
+        //view2.setBackgroundColor(Color.BLACK);
+        WaterButtonSection.addView(view2, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 2));
 
         AddButton.setText(R.string.add_water);
         AddButton.setTextSize(100);

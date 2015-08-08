@@ -142,7 +142,11 @@ public class RoundButton extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        widthMeasureSpec  = heightMeasureSpec;
+        if(widthMeasureSpec > heightMeasureSpec)
+            widthMeasureSpec = heightMeasureSpec;
+        else
+            heightMeasureSpec = widthMeasureSpec;
+        //widthMeasureSpec  = heightMeasureSpec;
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
