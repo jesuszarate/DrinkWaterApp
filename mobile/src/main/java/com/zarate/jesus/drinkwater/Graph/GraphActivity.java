@@ -32,9 +32,14 @@ public class GraphActivity extends Activity
 
         LinearLayout contentLayout = (LinearLayout) findViewById(R.id.content_Layout);
 
-        GraphView graphView = new GraphView(this);
-        contentLayout.addView(graphView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+//        GraphView graphView = new GraphView(this);
+//        contentLayout.addView(graphView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        PiGraph piGraph = new PiGraph(this);
+        contentLayout.addView(piGraph, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+
 
         _drawerListener = new android.support.v4.app.ActionBarDrawerToggle(GraphActivity.this, _drawerLayout,
                 R.drawable.ic_drawer,
