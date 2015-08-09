@@ -5,22 +5,19 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Space;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
+import com.zarate.jesus.drinkwater.Graph.GraphActivity;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 

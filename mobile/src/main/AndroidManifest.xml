@@ -26,7 +26,7 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".GraphActivity"
+            android:name=".Graph.GraphActivity"
             android:label="@string/title_activity_graph" >
         </activity>
     </application>

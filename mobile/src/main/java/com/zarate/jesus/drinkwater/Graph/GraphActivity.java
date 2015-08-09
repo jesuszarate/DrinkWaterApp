@@ -1,18 +1,18 @@
-package com.zarate.jesus.drinkwater;
+package com.zarate.jesus.drinkwater.Graph;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
 
 public class GraphActivity extends Activity
@@ -30,6 +30,11 @@ public class GraphActivity extends Activity
         _drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         _listView = (ListView) findViewById(R.id.left_drawer);
 
+        LinearLayout contentLayout = (LinearLayout) findViewById(R.id.content_Layout);
+
+        GraphView graphView = new GraphView(this);
+        contentLayout.addView(graphView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
 
         _drawerListener = new android.support.v4.app.ActionBarDrawerToggle(GraphActivity.this, _drawerLayout,
                 R.drawable.ic_drawer,
