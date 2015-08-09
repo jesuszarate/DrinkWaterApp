@@ -8,21 +8,26 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.View;
 
-import java.util.HashMap;
+import com.zarate.jesus.drinkwater.User;
 
 /**
+ *
+ *
  * Created by Jesus Zarate on 8/8/15.
  */
 public class GraphView extends View
 {
     Paint _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     RectF _contentRect = new RectF();
+    Point _point;
+
+    String[] _days = new String[]{"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
     public GraphView(Context context)
     {
         super(context);
 
-        //setBackgroundColor(Color.CYAN);
+        setBackgroundColor(Color.parseColor("#009788"));
     }
 
     @Override
@@ -35,46 +40,53 @@ public class GraphView extends View
         _contentRect.right = getWidth() - getPaddingRight();
         _contentRect.bottom = getHeight() - getPaddingBottom();
 
-        _paint.setColor(Color.BLACK);
+        _paint.setColor(Color.WHITE);
         _paint.setTextSize(50);
         _paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         int padding = 10;
         int graphHeight = 10;
-        int graphWidth = 10;
+        int graphWidth = 8;
         int heightSpacing = getHeight() / graphHeight;
         int widthSpacing = getWidth() / graphWidth;
 
+        int waterAmount = User.getInstance().getTotalWaterNeeded();
+        int increaseAmount = waterAmount / 10;//User.getInstance().getCupSize();
+
         for (int i = 0; i < graphHeight; i++)
         {
-            Point point = new Point();
-            point.setX(padding);
-            point.setY(i * heightSpacing);
+            _point = new Point();
+            _point.setX(padding);
+            _point.setY(i * heightSpacing);
 
-            GraphPoints.getInstance().getyPoints().put(i, point);
+            GraphPoints.getInstance().getyPoints().put(i, _point);
 
-            canvas.drawText(graphHeight - i + "",
-                    point.getX(),
-                    point.getY(),
+            // graphHeight - i + "",
+
+            canvas.drawText(waterAmount+"",
+                    _point.getX(),
+                    _point.getY() + 50,
                     _paint);
+            waterAmount -= increaseAmount;
         }
-        for (int i = 0; i < graphHeight; i++)
+
+        for (int i = 0; i < 8; i++)
         {
-            Point point = new Point();
-            point.setX((i * widthSpacing) + padding);
-            point.setY((graphHeight * heightSpacing));
+            _point = new Point();
+            _point.setX((i * widthSpacing) + (padding));
+            _point.setY((graphHeight * heightSpacing));
 
-            GraphPoints.getInstance().getxPoints().put(i, point);
+            GraphPoints.getInstance().getxPoints().put(i, _point);
 
-            canvas.drawText(i + "",
-                    point.getX(),
-                    point.getY(),
+            canvas.drawText(_days[i],
+                    _point.getX() - 30,
+                    _point.getY(),
                     _paint);
         }
 
-        // Graph point
+        // Graph _point
         int x = 1;
-        int y = graphHeight - 2; // This i equal to the point 2
+        int y = graphHeight - 2; // This is equal to the _point 2
         int radius = 20;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
@@ -82,9 +94,9 @@ public class GraphView extends View
 
         canvas.drawCircle(x, y, radius, _paint);
 
-        // Graph point
+        // Graph _point
         x = 3;
-        y = graphHeight - 6; // This i equal to the point 2
+        y = graphHeight - 6; // This i equal to the _point 2
         radius = 20;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
@@ -92,9 +104,9 @@ public class GraphView extends View
 
         canvas.drawCircle(x, y, radius, _paint);
 
-        // Graph point
+        // Graph _point
         x = 2;
-        y = graphHeight - 5; // This i equal to the point 2
+        y = graphHeight - 5; // This i equal to the _point 2
         radius = 20;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();

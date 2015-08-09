@@ -1,4 +1,4 @@
-package com.zarate.jesus.drinkwater.Graph;
+package com.zarate.jesus.drinkwater.Graph.PiGraph;
 
 import android.content.Context;
 import android.graphics.Canvas;
