@@ -41,7 +41,8 @@ public class RoundTextView extends View
         paint.setTextSize(100);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        String text = User.getInstance().getTotalWaterPercentage() + "";
+        String text = User.getInstance().getTotalWaterConsumption() + " oz";
+        //String text = User.getInstance().getTotalWaterPercentage() + "";
 
         canvas.drawText(text,
                 calculateCenterX(text, paint.getTextSize()),

@@ -39,7 +39,7 @@ public class GraphActivity extends Activity
         setContentView(R.layout.activity_graph);
 
         // This is midnight -> 0 hour 0 minute 0 second
-        AlarmStarter.setAlarmByHour(this, 12345, 2, 0, 0);
+        AlarmStarter.setAlarmByHour(this, 12345, 2, 30, 0);
 
         _drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         _listView = (ListView) findViewById(R.id.left_drawer);

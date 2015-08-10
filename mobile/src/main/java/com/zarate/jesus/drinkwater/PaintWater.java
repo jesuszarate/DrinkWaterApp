@@ -74,7 +74,7 @@ public class PaintWater extends LinearLayout
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());
-            area.top = (getHeight() - (User.getInstance().getTotalWaterConsumption()));
+            area.top = (int)(getHeight() - (User.getInstance().getTotalWaterConsumptionFill()));
             area.right = ((getWidth() - getPaddingRight()));
             area.bottom = ((getHeight() - getPaddingBottom()));
 
@@ -98,6 +98,8 @@ public class PaintWater extends LinearLayout
         {
             return 0;
         }
+
     }
+
 }
 

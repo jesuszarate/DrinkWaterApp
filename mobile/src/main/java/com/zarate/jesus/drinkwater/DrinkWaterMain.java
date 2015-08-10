@@ -112,13 +112,13 @@ public class DrinkWaterMain extends Activity
 
         // Percentage indicator Section
         LinearLayout percentageSection = new LinearLayout(this);
-        final RoundTextView roundButton = new RoundTextView(this);
-        roundButton.setBackgroundResource(R.drawable.oval_ripple);
-        roundButton.setElevation(50);
+        final RoundTextView consumptionIndicator = new RoundTextView(this);
+        consumptionIndicator.setBackgroundResource(R.drawable.oval_ripple);
+        consumptionIndicator.setElevation(50);
 
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        percentageSection.addView(roundButton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        percentageSection.addView(consumptionIndicator, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
@@ -159,7 +159,7 @@ public class DrinkWaterMain extends Activity
             public void onClick(View v)
             {
                 rootLayout.addWater();
-                roundButton.invalidate();
+                consumptionIndicator.invalidate();
             }
         });
 
@@ -171,7 +171,7 @@ public class DrinkWaterMain extends Activity
                 v.startAnimation(_buttonClick);
 
                 rootLayout.removeWater();
-                roundButton.invalidate();
+                consumptionIndicator.invalidate();
             }
         });
 

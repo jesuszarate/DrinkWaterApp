@@ -1,6 +1,7 @@
 package com.zarate.jesus.drinkwater;
 
-import java.util.ArrayList;
+import android.util.Log;
+
 import java.util.HashMap;
 
 /**
@@ -47,9 +48,10 @@ public class User
     };
 
     private String _name;
-    private int _weight = 0;
+    private double _weight = 0;
     private double _height = 0;
-    private int TotalWaterConsumption = 0;
+    private double TotalWaterConsumptionFill = 0;
+    private double TotalWaterConsumption = 0;
     private double TotalWaterPercentage = 0;
     private double RemainingWaterConsumption = 0;
     private double _percentagePortion = 0;
@@ -99,7 +101,7 @@ public class User
         this._name = _name;
     }
 
-    public int get_weight()
+    public double get_weight()
     {
         return _weight;
     }
@@ -120,14 +122,14 @@ public class User
     }
 
 
-    public int getTotalWaterConsumption()
+    public double getTotalWaterConsumptionFill()
     {
-        return TotalWaterConsumption;
+        return TotalWaterConsumptionFill;
     }
 
-    public void setTotalWaterConsumption(int totalWaterConsumption)
+    public void setTotalWaterConsumptionFill(int totalWaterConsumptionFill)
     {
-        TotalWaterConsumption = totalWaterConsumption;
+        TotalWaterConsumptionFill = totalWaterConsumptionFill;
     }
 
     public double getTotalWaterPercentage()
@@ -140,26 +142,63 @@ public class User
         TotalWaterPercentage = totalWaterPercentage;
     }
 
+    public double getTotalWaterConsumption()
+    {
+        return TotalWaterConsumption;
+    }
+
+    public void setTotalWaterConsumption(int totalWaterConsumption)
+    {
+        TotalWaterConsumption = totalWaterConsumption;
+    }
+
     public boolean addWater(int height)
     {
-        int part = (getTotalWaterNeeded() / getCupSize());
-        int amount = height / part;
-        _percentagePortion = User.getInstance().getTotalWaterNeeded() / part;
+        double part = 1;
+        double amount = 0;
+        if (getCupSize() > 0)
+        {
+            part = totalWaterNeeded / (double)cupSize;
+        } else
+            Log.e("Error", "In User, method 'addWater(int height) cupSize is 0 and it's trying to divide by 0'");
+
+        if (part > 0)
+        {
+            amount = height / part;
+            _percentagePortion = totalWaterNeeded / part;
+        } else
+            Log.e("Error", "In User, method 'addWater(int height) part is 0 and it's trying to divide by 0'");
+
         TotalWaterPercentage += _percentagePortion;
-        TotalWaterConsumption += amount;
+        TotalWaterConsumptionFill += amount;
+        TotalWaterConsumption += cupSize;
         return true;
     }
 
     public boolean removeWater(int height)
     {
-        int part = (getTotalWaterNeeded() / getCupSize());
-        int amount = height / part;
-        _percentagePortion = User.getInstance().getTotalWaterNeeded() / part;
+        double part = 1;
+        double amount = 0;
 
-        if ((TotalWaterConsumption) > 0)
+        if (getCupSize() > 0)
+        {
+            part = (totalWaterNeeded / (double)cupSize);
+        }
+        else
+            Log.e("Error", "In User, method 'addWater(int height) cupSize is 0 and it's trying to divide by 0'");
+
+        if (part > 0)
+        {
+            amount = height / part;
+            _percentagePortion = totalWaterNeeded / part;
+        } else
+            Log.e("Error", "In User, method 'addWater(int height) part is 0 and it's trying to divide by 0'");
+
+        if ((TotalWaterConsumptionFill) > 0)
         {
             TotalWaterPercentage -= _percentagePortion;
-            TotalWaterConsumption -= amount;
+            TotalWaterConsumptionFill -= amount;
+            TotalWaterConsumption -= cupSize;
             return true;
         }
         return false;
