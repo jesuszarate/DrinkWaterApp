@@ -29,6 +29,10 @@
             android:name=".Graph.GraphActivity"
             android:label="@string/title_activity_graph" >
         </activity>
+        <activity
+            android:name=".Alarm.AlarmReceiverActivity"
+            android:label="@string/title_activity_alarm" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.Space;
+import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
@@ -24,6 +25,7 @@ import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -65,6 +67,14 @@ public class DrinkWaterMain extends Activity
             {
                 try
                 {
+                    String weekDay;
+                    SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.US);
+
+                    Calendar calendar = Calendar.getInstance();
+                    weekDay = dayFormat.format(calendar.getTime());
+
+                    Toast.makeText(DrinkWaterMain.this, weekDay, Toast.LENGTH_LONG).show();
+
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
                 } catch (Exception e)

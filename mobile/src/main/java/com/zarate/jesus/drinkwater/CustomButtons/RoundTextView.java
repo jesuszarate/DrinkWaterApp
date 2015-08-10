@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.view.View;
 
 import com.zarate.jesus.drinkwater.User;
-import com.zarate.jesus.drinkwater.WaterConsumption;
 
 /**
  * Created by Jesus Zarate on 7/30/15.

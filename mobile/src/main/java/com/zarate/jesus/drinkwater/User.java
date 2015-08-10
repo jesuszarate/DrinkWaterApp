@@ -1,5 +1,6 @@
 package com.zarate.jesus.drinkwater;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,7 +12,7 @@ public class User
 
     public static User getInstance()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = new User();
         }

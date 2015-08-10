@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.View;
@@ -17,11 +18,11 @@ import com.zarate.jesus.drinkwater.User;
  */
 public class GraphView extends View
 {
-    Paint _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    RectF _contentRect = new RectF();
-    Point _point;
-
-    String[] _days = new String[]{"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    private Paint _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private RectF _contentRect = new RectF();
+    private Point _point;
+    private Rect _textBounds = new Rect();
+    private String[] _days = new String[]{"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
     public GraphView(Context context)
     {
@@ -61,8 +62,6 @@ public class GraphView extends View
 
             GraphPoints.getInstance().getyPoints().put(i, _point);
 
-            // graphHeight - i + "",
-
             canvas.drawText(waterAmount+"",
                     _point.getX(),
                     _point.getY() + 50,
@@ -87,12 +86,19 @@ public class GraphView extends View
         // Graph _point
         int x = 1;
         int y = graphHeight - 2; // This is equal to the _point 2
-        int radius = 20;
+        int radius = 35;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
         y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
 
+
         canvas.drawCircle(x, y, radius, _paint);
+        _paint.setTextSize(25);
+        _paint.setColor(Color.BLACK);
+
+        String text = "29";
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
 
         // Graph _point
         x = 3;
@@ -114,6 +120,7 @@ public class GraphView extends View
 
         canvas.drawCircle(x, y, radius, _paint);
     }
+
 }
 
 
