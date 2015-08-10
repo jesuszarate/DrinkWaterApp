@@ -92,33 +92,44 @@ public class GraphView extends View
         y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
 
 
+        _paint.setColor(Color.WHITE);
         canvas.drawCircle(x, y, radius, _paint);
-        _paint.setTextSize(25);
-        _paint.setColor(Color.BLACK);
 
         String text = "29";
         _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        _paint.setColor(Color.BLACK);
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
 
         // Graph _point
         x = 3;
         y = graphHeight - 6; // This i equal to the _point 2
-        radius = 20;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
         y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
 
+        _paint.setColor(Color.WHITE);
         canvas.drawCircle(x, y, radius, _paint);
+
+         text = "30";
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        _paint.setColor(Color.BLACK);
+        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
 
         // Graph _point
         x = 2;
         y = graphHeight - 5; // This i equal to the _point 2
-        radius = 20;
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
         y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
 
+        _paint.setColor(Color.WHITE);
         canvas.drawCircle(x, y, radius, _paint);
+
+         text = "31";
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        _paint.setColor(Color.BLACK);
+        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
+
     }
 
 }

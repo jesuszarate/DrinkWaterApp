@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zarate.jesus.drinkwater.Alarm.AlarmReceiverActivity;
+import com.zarate.jesus.drinkwater.Alarm.AlarmStarter;
 import com.zarate.jesus.drinkwater.R;
 
 import java.util.Calendar;
@@ -37,19 +38,8 @@ public class GraphActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        //Create an offset from the current time in which the alarm will go off.
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, 5);
-
-        //Create a new PendingIntent and add it to the AlarmManager
-        Intent intent = new Intent(this, AlarmReceiverActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                12345, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager am =
-                (AlarmManager)getSystemService(Activity.ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                pendingIntent);
-
+        // This is midnight -> 0 hour 0 minute 0 second
+        AlarmStarter.setAlarmByHour(this, 12345, 2, 0, 0);
 
         _drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         _listView = (ListView) findViewById(R.id.left_drawer);

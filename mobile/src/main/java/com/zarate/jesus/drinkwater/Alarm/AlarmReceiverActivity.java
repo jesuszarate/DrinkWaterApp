@@ -33,33 +33,32 @@ public class AlarmReceiverActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-//        LinearLayout rootLayout = new LinearLayout(this);
-//        setContentView(rootLayout);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         User.getInstance().set_weight(8);
         User.getInstance().setCupSize(10000);
 
         SavingAndLoading.SaveState(getFilesDir());
 
-        finish();
+        //finish();
 
+        LinearLayout rootLayout = new LinearLayout(this);
+        setContentView(rootLayout);
 
-//        Button stopAlarm = new Button(this);
-//        stopAlarm.setText("button");
-//        rootLayout.addView(stopAlarm, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        stopAlarm.setOnTouchListener(new View.OnTouchListener() {
-//            public boolean onTouch(View arg0, MotionEvent arg1) {
-//                mMediaPlayer.stop();
-//                finish();
-//                return false;
-//            }
-//        });
-//
-//        playSound(this, getAlarmUri());
+        Button stopAlarm = new Button(this);
+        stopAlarm.setText("button");
+        rootLayout.addView(stopAlarm, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        stopAlarm.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                mMediaPlayer.stop();
+                finish();
+                return false;
+            }
+        });
+
+        playSound(this, getAlarmUri());
     }
 
     private void playSound(Context context, Uri alert)
