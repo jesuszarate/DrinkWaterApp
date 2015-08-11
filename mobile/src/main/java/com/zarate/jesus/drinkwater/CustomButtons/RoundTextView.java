@@ -4,17 +4,25 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.View;
 
 import com.zarate.jesus.drinkwater.User;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Jesus Zarate on 7/30/15.
  */
 public class RoundTextView extends View
 {
+    Paint _paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    RectF _contentRect = new RectF();
+    Rect _textBounds = new Rect();
+    DecimalFormat decimalFormat = new DecimalFormat("####0.00");
+
     public RoundTextView(Context context)
     {
         super(context);
@@ -24,30 +32,35 @@ public class RoundTextView extends View
     protected void onDraw(Canvas canvas)
     {
         super.onDraw(canvas);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLUE);
 
-        RectF contentRect = new RectF();
-        contentRect.left = getPaddingLeft();
-        contentRect.top = getPaddingTop();
-        contentRect.right = getWidth() - getPaddingRight();
-        contentRect.bottom = getHeight() - getPaddingBottom();
+        _contentRect.left = getPaddingLeft();
+        _contentRect.top = getPaddingTop();
+        _contentRect.right = getWidth() - getPaddingRight();
+        _contentRect.bottom = getHeight() - getPaddingBottom();
 
-        //paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
-
-        //canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), 20, paint);
-
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(100);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-
+        // Total water consumption indicator
+        _paint.setColor(Color.WHITE);
+        _paint.setTextSize(100);
+        _paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         String text = User.getInstance().getTotalWaterConsumption() + " oz";
-        //String text = User.getInstance().getTotalWaterPercentage() + "";
-
         canvas.drawText(text,
-                calculateCenterX(text, paint.getTextSize()),
-                calculateCenterY(text, paint.getTextSize()),
-                paint);
+                calculateCenterX(text, _paint.getTextSize()),
+                calculateCenterY(text, _paint.getTextSize()),
+                _paint);
+
+
+        // Water percentage indicator
+        _paint.setColor(Color.parseColor("#33009788"));
+        int radius = 150;
+        float x = _contentRect.right/2;
+        float y = _contentRect.top + radius;
+        canvas.drawCircle(x, y, radius, _paint);
+
+        text = decimalFormat.format(User.getInstance().getTotalWaterPercentage()) + "%";
+        _paint.setTextSize(70);
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        _paint.setColor(Color.WHITE);
+        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
     }
 
     @Override

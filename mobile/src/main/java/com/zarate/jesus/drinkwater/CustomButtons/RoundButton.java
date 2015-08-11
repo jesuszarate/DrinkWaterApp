@@ -111,7 +111,6 @@ public class RoundButton extends View
         paint.setShadowLayer(10, contentRect.centerX(), contentRect.centerY(), Color.GRAY);
 
         _radius = getHeight()/2;
-        //canvas.drawCircle(contentRect.centerX(), contentRect.centerY(), _radius, paint);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 

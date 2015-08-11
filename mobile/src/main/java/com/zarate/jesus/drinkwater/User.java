@@ -59,6 +59,7 @@ public class User
     private int reminderTime = 15; // In minutes
     private int totalWaterNeeded = 64;
     private Stack<Double> TotalWaterConsumptionStack = new Stack<>();
+    private Stack<Double> TotalWaterPercentageStack = new Stack<>();
 
     private int cupSize = 20;
     private MeasurementUnits measurementUnit;
@@ -168,7 +169,8 @@ public class User
         if (part > 0)
         {
             amount = height / part;
-            _percentagePortion = totalWaterNeeded / part;
+            //_percentagePortion = totalWaterNeeded / part;
+            _percentagePortion = 100 / part;
         } else
             Log.e("Error", "In User, method 'addWater(int height) part is 0 and it's trying to divide by 0'");
 
@@ -176,6 +178,7 @@ public class User
         TotalWaterConsumptionFill += amount;
         TotalWaterConsumption += cupSize;
         TotalWaterConsumptionStack.push((double)cupSize);
+        TotalWaterPercentageStack.push(_percentagePortion);
         return true;
     }
 
@@ -196,13 +199,14 @@ public class User
         if (part > 0)
         {
             amount = height / part;
-            _percentagePortion = totalWaterNeeded / part;
+            _percentagePortion = 100 / part;
+            //_percentagePortion = totalWaterNeeded / part;
         } else
             Log.e("Error", "In User, method 'addWater(int height) part is 0 and it's trying to divide by 0'");
 
         if ((TotalWaterConsumptionFill) > 0)
         {
-            TotalWaterPercentage -= _percentagePortion;
+            TotalWaterPercentage -= TotalWaterPercentageStack.isEmpty() ? 0 : TotalWaterPercentageStack.pop();//_percentagePortion;
             TotalWaterConsumptionFill -= amount;
             TotalWaterConsumption -= previousCupSize;
             return true;
