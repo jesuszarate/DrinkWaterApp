@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.zarate.jesus.drinkwater.Graph.GraphActivity;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.User;
 
@@ -57,6 +58,8 @@ public class AlarmReceiverActivity extends Activity
                 return false;
             }
         });
+
+
 
         playSound(this, getAlarmUri());
     }

@@ -25,19 +25,16 @@ public class AlarmStarter
         Intent intent = new Intent(context, AlarmReceiverActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,
                 id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-                //12345, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am =
                 (AlarmManager)context.getSystemService(Activity.ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                pendingIntent);
-
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     public static void setAlarmByTimer(Context context, int id, int minutes)
     {
         //Create an offset from the current time in which the alarm will go off.
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, minutes);
 
         //Create a new PendingIntent and add it to the AlarmManager
         Intent intent = new Intent(context, AlarmReceiverActivity.class);
@@ -45,8 +42,16 @@ public class AlarmStarter
                 id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am =
                 (AlarmManager)context.getSystemService(Activity.ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                pendingIntent);
 
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                        minutes * 60000, pendingIntent);
+    }
+
+    public static void cancelAlarmByTimer(Context context, int id)
+    {
+        AlarmManager alarmManager=(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiverActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
+        alarmManager.cancel(pendingIntent);
     }
 }
