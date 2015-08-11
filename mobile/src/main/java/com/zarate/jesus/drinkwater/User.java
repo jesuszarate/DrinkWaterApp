@@ -3,6 +3,7 @@ package com.zarate.jesus.drinkwater;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * Created by Jesus Zarate on 7/25/15.
@@ -48,7 +49,7 @@ public class User
     };
 
     private String _name;
-    private double _weight = 0;
+    private double _weight = 130;
     private double _height = 0;
     private double TotalWaterConsumptionFill = 0;
     private double TotalWaterConsumption = 0;
@@ -57,6 +58,7 @@ public class User
     private double _percentagePortion = 0;
     private int reminderTime = 15; // In minutes
     private int totalWaterNeeded = 64;
+    private Stack<Double> TotalWaterConsumptionStack = new Stack<>();
 
     private int cupSize = 20;
     private MeasurementUnits measurementUnit;
@@ -101,14 +103,15 @@ public class User
         this._name = _name;
     }
 
-    public double get_weight()
+    public double getWeight()
     {
         return _weight;
     }
 
-    public void set_weight(int _weight)
+    public void setWeight(double weight)
     {
-        this._weight = _weight;
+        if(weight > 0)
+            this._weight = weight;
     }
 
     public double get_height()
@@ -172,6 +175,7 @@ public class User
         TotalWaterPercentage += _percentagePortion;
         TotalWaterConsumptionFill += amount;
         TotalWaterConsumption += cupSize;
+        TotalWaterConsumptionStack.push((double)cupSize);
         return true;
     }
 
@@ -179,10 +183,12 @@ public class User
     {
         double part = 1;
         double amount = 0;
+        double previousCupSize =
+                TotalWaterConsumptionStack.isEmpty() ? 0 : TotalWaterConsumptionStack.pop();
 
         if (getCupSize() > 0)
         {
-            part = (totalWaterNeeded / (double)cupSize);
+            part = (totalWaterNeeded / previousCupSize);
         }
         else
             Log.e("Error", "In User, method 'addWater(int height) cupSize is 0 and it's trying to divide by 0'");
@@ -198,7 +204,7 @@ public class User
         {
             TotalWaterPercentage -= _percentagePortion;
             TotalWaterConsumptionFill -= amount;
-            TotalWaterConsumption -= cupSize;
+            TotalWaterConsumption -= previousCupSize;
             return true;
         }
         return false;

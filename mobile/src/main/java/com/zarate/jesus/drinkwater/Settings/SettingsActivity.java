@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
@@ -25,7 +24,6 @@ import com.zarate.jesus.drinkwater.User;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Created by Jesus Zarate on 8/1/15.
@@ -53,7 +51,7 @@ public class SettingsActivity extends Activity
         userWeight.setTextColor(Color.WHITE);
         userWeight.setTypeface(Typeface.DEFAULT_BOLD);
         weightInput = new EditText(this);
-        weightInput.setText(User.getInstance().get_weight() + "");
+        weightInput.setText((int)User.getInstance().getWeight() + "");
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
@@ -62,15 +60,23 @@ public class SettingsActivity extends Activity
             {
                 try
                 {
-                    String currentWeight = User.getInstance().get_weight() + "";
-                    String w = weightInput.getText().toString();
-                    if (!currentWeight.equals(weightInput.getText()+""))
+                    double inputWeight = Double.parseDouble(weightInput.getText().toString());
+                    double currWeight = User.getInstance().getWeight();
+
+                    if(currWeight != inputWeight && inputWeight > 0)
                     {
                         User.getInstance().setTotalWaterNeeded(Integer.parseInt(weightInput.getText().toString()) / 2);
 
                         if (!weightInput.getText().toString().isEmpty())
                             waterNeededInput.setText(User.getInstance().getTotalWaterNeeded() + "");
                     }
+                    else if(inputWeight <= 0)
+                    {
+                        weightInput.setText((int)currWeight + "");
+                        Toast.makeText(SettingsActivity.this,
+                                "Weight must be greater 0", Toast.LENGTH_LONG).show();
+                    }
+
                 } catch (Exception e)
                 {
                     Log.e("Weight onFocusChange", e.toString());
@@ -151,7 +157,11 @@ public class SettingsActivity extends Activity
                 try
                 {
                     if (weightInput != null && !weightInput.getText().toString().isEmpty())
-                        User.getInstance().set_weight(Integer.parseInt(weightInput.getText().toString()));
+                    {
+                        double d = Double.parseDouble(weightInput.getText().toString());
+                        User.getInstance().setWeight(d);
+                    }
+                        //User.getInstance().setWeight(Double.parseDouble(weightInput.getText().toString()));
                     if (cupSizeInput != null && !cupSizeInput.getText().toString().isEmpty())
                         User.getInstance().setCupSize(Integer.parseInt(cupSizeInput.getText().toString()));
                     if (waterNeededInput != null && !waterNeededInput.getText().toString().isEmpty())

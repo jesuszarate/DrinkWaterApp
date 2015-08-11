@@ -37,7 +37,7 @@ public class AlarmReceiverActivity extends Activity
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        User.getInstance().set_weight(8);
+        User.getInstance().setWeight(8);
         User.getInstance().setCupSize(10000);
 
         SavingAndLoading.SaveState(getFilesDir());
