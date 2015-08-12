@@ -40,9 +40,7 @@ public class AlarmReceiverActivity extends Activity
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        //User.getInstance().setWeight(8);
-        //User.getInstance().setCupSize(10000);
-
+        // Todo: The alarm is not being fired it is. Hook that up so that it can be fired at midnight.
         // Save the data for the day.
         WaterConsumptionHistory.getInstance().addDay((int)User.getInstance().getTotalWaterConsumption());
 

@@ -1,10 +1,6 @@
 package com.zarate.jesus.drinkwater;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
