@@ -1,9 +1,6 @@
 package com.zarate.jesus.drinkwater.Graph;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,18 +11,12 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.zarate.jesus.drinkwater.Alarm.AlarmReceiverActivity;
-import com.zarate.jesus.drinkwater.Alarm.AlarmStarter;
 import com.zarate.jesus.drinkwater.R;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
-
-import java.util.Calendar;
 
 public class GraphActivity extends Activity
 {

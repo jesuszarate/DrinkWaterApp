@@ -141,7 +141,7 @@ public class GraphView extends View
 
     public void drawPoint(Canvas canvas, int radius, int day)
     {
-        int waterAmount = WaterConsumptionHistory.getInstance().getDayWaterAmount(day);
+        int waterAmount = WaterConsumptionHistory.get_instance().getDayWaterAmount(day);
 
         int x = day + 1; // Plus one for alignment purposes.
 
@@ -159,7 +159,7 @@ public class GraphView extends View
 
     public int getDayIndex(String day)
     {
-        String[] days = WaterConsumptionHistory.getInstance().getDAYS_OF_WEEK();
+        String[] days = WaterConsumptionHistory.get_instance().getDAYS_OF_WEEK();
         for(int i = 0; i < day.length(); i++)
         {
             if(days[i].equals(day))

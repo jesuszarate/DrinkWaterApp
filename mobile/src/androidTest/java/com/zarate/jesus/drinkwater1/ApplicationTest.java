@@ -18,6 +18,6 @@ public class ApplicationTest extends ApplicationTestCase<Application>
 
     @MediumTest
     public void testWaterConsumptionHistoryAddDay() {
-        WaterConsumptionHistory.getInstance().addDay(20);
+        WaterConsumptionHistory.get_instance().addDay(20);
     }
 }

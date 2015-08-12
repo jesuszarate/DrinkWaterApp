@@ -6,13 +6,13 @@ import com.zarate.jesus.drinkwater.User;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 
 /**
@@ -25,20 +25,21 @@ public class SavingAndLoading
         Gson _gson = new Gson();
 
         User user = User.getInstance();
+        WaterConsumptionHistory WCH = WaterConsumptionHistory.getInstance();
 
         String jsonUser = _gson.toJson(user);
+        String jsonWCH = _gson.toJson(WCH);
 
-        try {
+        try
+        {
             File file = new File(filesDir, "user-profile.txt");
-            FileWriter textWriter;
-            textWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(textWriter);
+            saveFile(file, jsonUser);
 
-            // Write the paint points in json format.
-            bufferedWriter.write(jsonUser);
-            bufferedWriter.close();
+            file = new File(filesDir, "water-consumption-history.txt");
+            saveFile(file, jsonWCH);
 
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -46,24 +47,60 @@ public class SavingAndLoading
     public static void LoadState(File filesDir)
     {
         Gson _gson = new Gson();
-        try {
+        try
+        {
             File file = new File(filesDir, "user-profile.txt");
-            FileReader textReader = new FileReader(file);
-            BufferedReader bufferedTextReader = new BufferedReader(textReader);
-            String jsonUser;
-            jsonUser = bufferedTextReader.readLine();
+            loadUserProfile(_gson, file);
 
-            Type userType = new TypeToken<User>(){}.getType();
-            User user = _gson.fromJson(jsonUser, userType);
-
-            User.setInstance(user);
-
-            bufferedTextReader.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            file = new File(filesDir, "water-consumption-history.txt");
+            loadWCH(_gson, file);
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
+    }
+
+    private static void saveFile(File file, String jsonString) throws IOException
+    {
+        FileWriter textWriter;
+        textWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(textWriter);
+
+        bufferedWriter.write(jsonString);
+        bufferedWriter.close();
+    }
+
+    private static void loadWCH(Gson gson, File file) throws IOException
+    {
+        FileReader textReader = new FileReader(file);
+        BufferedReader bufferedTextReader = new BufferedReader(textReader);
+        String jsonWCH;
+        jsonWCH = bufferedTextReader.readLine();
+
+        Type userType = new TypeToken<WaterConsumptionHistory>()
+        {
+        }.getType();
+        WaterConsumptionHistory WCH = gson.fromJson(jsonWCH, userType);
+
+        WaterConsumptionHistory.setInstance(WCH);
+
+        bufferedTextReader.close();
+    }
+
+    private static void loadUserProfile(Gson gson, File file) throws IOException
+    {
+        FileReader textReader = new FileReader(file);
+        BufferedReader bufferedTextReader = new BufferedReader(textReader);
+        String jsonUser;
+        jsonUser = bufferedTextReader.readLine();
+
+        Type userType = new TypeToken<User>()
+        {
+        }.getType();
+        User user = gson.fromJson(jsonUser, userType);
+
+        User.setInstance(user);
+
+        bufferedTextReader.close();
     }
 }

@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.zarate.jesus.drinkwater.Graph.GraphActivity;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.User;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
@@ -42,7 +41,7 @@ public class AlarmReceiverActivity extends Activity
 
         // Todo: The alarm is not being fired it is. Hook that up so that it can be fired at midnight.
         // Save the data for the day.
-        WaterConsumptionHistory.getInstance().addDay((int)User.getInstance().getTotalWaterConsumption());
+        WaterConsumptionHistory.get_instance().addDay((int)User.getInstance().getTotalWaterConsumption());
 
         SavingAndLoading.SaveState(getFilesDir());
 

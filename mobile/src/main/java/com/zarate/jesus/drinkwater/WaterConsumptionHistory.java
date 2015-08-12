@@ -10,11 +10,20 @@ import java.util.Locale;
  */
 public class WaterConsumptionHistory
 {
-    private static WaterConsumptionHistory instance = new WaterConsumptionHistory();
+    private static WaterConsumptionHistory _instance;
 
     public static WaterConsumptionHistory getInstance()
     {
-        return instance;
+        if(_instance == null)
+        {
+            _instance = new WaterConsumptionHistory();
+        }
+        return _instance;
+    }
+
+    public static void setInstance(WaterConsumptionHistory instance)
+    {
+        _instance = instance;
     }
 
     private WaterConsumptionHistory()
