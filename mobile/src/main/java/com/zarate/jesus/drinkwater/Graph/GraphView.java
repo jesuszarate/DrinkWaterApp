@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.view.View;
 
 import com.zarate.jesus.drinkwater.User;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 /**
  *
@@ -22,7 +23,9 @@ public class GraphView extends View
     private RectF _contentRect = new RectF();
     private Point _point;
     private Rect _textBounds = new Rect();
+    private int _yPadding = 50;
     private String[] _days = new String[]{"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+
 
     public GraphView(Context context)
     {
@@ -61,10 +64,11 @@ public class GraphView extends View
             _point.setY(i * heightSpacing);
 
             GraphPoints.getInstance().getyPoints().put(i, _point);
+            GraphPoints.getInstance().getY().put(waterAmount, (float)(i * heightSpacing));
 
             canvas.drawText(waterAmount+"",
                     _point.getX(),
-                    _point.getY() + 50,
+                    _point.getY() + _yPadding,
                     _paint);
             waterAmount -= increaseAmount;
         }
@@ -74,6 +78,7 @@ public class GraphView extends View
             _point = new Point();
             _point.setX((i * widthSpacing) + (padding));
             _point.setY((graphHeight * heightSpacing));
+
 
             GraphPoints.getInstance().getxPoints().put(i, _point);
 
@@ -130,6 +135,27 @@ public class GraphView extends View
         _paint.setColor(Color.BLACK);
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
 
+        drawPoint(canvas, graphHeight, radius);
+    }
+
+    public void drawPoint(Canvas canvas, int graphHeight, int radius)
+    {
+        // Dynamic point
+        int waterAmount = WaterConsumptionHistory.getInstance().getDayWaterAmount(1);
+
+        int x = 2;
+
+        x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
+        //y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
+        float y = GraphPoints.getInstance().getY().get(waterAmount) + _yPadding;
+
+        _paint.setColor(Color.WHITE);
+        canvas.drawCircle(x, y, radius, _paint);
+
+        String text = waterAmount+"";
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+        _paint.setColor(Color.BLACK);
+        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
     }
 
 }

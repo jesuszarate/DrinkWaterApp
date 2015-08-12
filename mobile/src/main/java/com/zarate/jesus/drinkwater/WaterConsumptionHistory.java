@@ -32,8 +32,17 @@ public class WaterConsumptionHistory
                     "January", "February", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December"
             };
+    String[] DAYS_OF_WEEK = new String[]
+            {
+                    "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
+            };
 
-    public void addDay(Context context, int waterAmount)
+    public String getCurrentWeek()
+    {
+        return _currentWeek;
+    }
+
+    public void addDay(int waterAmount)
     {
         Calendar calendar = Calendar.getInstance();
         int index = calendar.get(Calendar.MONTH);
@@ -46,7 +55,7 @@ public class WaterConsumptionHistory
         weekDay = dayFormat.format(calendar.getTime());
 
         int date = calendar.get(Calendar.DATE);
-        if(weekDay.equals("Mon"))
+        if (weekDay.equals("Mon"))
         {
             _currentWeek = month + " " + date;
             Week week = new Week();
@@ -60,7 +69,7 @@ public class WaterConsumptionHistory
         day.year = calendar.get(Calendar.YEAR);
         day.waterAmount = waterAmount;
 
-        if(!_weeks.containsKey(_currentWeek))
+        if (!_weeks.containsKey(_currentWeek))
         {
             // Get this weeks Monday
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -73,6 +82,13 @@ public class WaterConsumptionHistory
 
         }
         _weeks.get(_currentWeek).week.put(weekDay, day);
+    }
+
+    // Only works with current week for now.
+    public int getDayWaterAmount(int DayOfWeek)
+    {
+        String day = DAYS_OF_WEEK[DayOfWeek];
+        return _weeks.get(_currentWeek).week.get(day).waterAmount;
     }
 
     class Day
@@ -91,8 +107,6 @@ public class WaterConsumptionHistory
     {
         HashMap<String, Day> week = new HashMap<>();
     }
-
-
 
     /**
      * Consists of four weeks

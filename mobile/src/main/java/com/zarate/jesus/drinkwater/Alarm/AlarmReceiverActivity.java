@@ -44,7 +44,7 @@ public class AlarmReceiverActivity extends Activity
         //User.getInstance().setCupSize(10000);
 
         // Save the data for the day.
-        WaterConsumptionHistory.getInstance().addDay(this, (int)User.getInstance().getTotalWaterConsumption());
+        WaterConsumptionHistory.getInstance().addDay((int)User.getInstance().getTotalWaterConsumption());
 
         SavingAndLoading.SaveState(getFilesDir());
 

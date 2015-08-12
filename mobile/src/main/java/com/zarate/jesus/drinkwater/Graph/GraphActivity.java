@@ -41,7 +41,7 @@ public class GraphActivity extends Activity
 
         // This is midnight -> 0 hour 0 minute 0 second
         //AlarmStarter.setAlarmByHour(this, 12345, 0, 0, 0);
-        WaterConsumptionHistory.getInstance().addDay(this, 40);
+        WaterConsumptionHistory.getInstance().addDay(40);
 
         //AlarmStarter.setAlarmByTimer(this, 12345, 1);
 
@@ -52,7 +52,8 @@ public class GraphActivity extends Activity
         contentLayout.setOrientation(LinearLayout.VERTICAL);
 
         TextView textView = new TextView(this);
-        textView.setText("August 02 - August 09");
+        //textView.setText("August 02 - August 09");
+        textView.setText(WaterConsumptionHistory.getInstance().getCurrentWeek());
         textView.setTextSize(25);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setBackgroundColor(Color.parseColor("#009788"));
