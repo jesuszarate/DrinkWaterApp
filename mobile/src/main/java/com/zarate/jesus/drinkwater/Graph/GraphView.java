@@ -135,18 +135,17 @@ public class GraphView extends View
         _paint.setColor(Color.BLACK);
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
 
-        drawPoint(canvas, graphHeight, radius);
+        int tuesday = 1;
+        drawPoint(canvas, radius, tuesday);
     }
 
-    public void drawPoint(Canvas canvas, int graphHeight, int radius)
+    public void drawPoint(Canvas canvas, int radius, int day)
     {
-        // Dynamic point
-        int waterAmount = WaterConsumptionHistory.getInstance().getDayWaterAmount(1);
+        int waterAmount = WaterConsumptionHistory.getInstance().getDayWaterAmount(day);
 
-        int x = 2;
+        int x = day + 1; // Plus one for alignment purposes.
 
         x = (int) GraphPoints.getInstance().getxPoints().get(x).getX();
-        //y = (int) GraphPoints.getInstance().getyPoints().get(y).getY();
         float y = GraphPoints.getInstance().getY().get(waterAmount) + _yPadding;
 
         _paint.setColor(Color.WHITE);
@@ -158,6 +157,16 @@ public class GraphView extends View
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
     }
 
+    public int getDayIndex(String day)
+    {
+        String[] days = WaterConsumptionHistory.getInstance().getDAYS_OF_WEEK();
+        for(int i = 0; i < day.length(); i++)
+        {
+            if(days[i].equals(day))
+                return i + 1;
+        }
+        return -1;
+    }
 }
 
 

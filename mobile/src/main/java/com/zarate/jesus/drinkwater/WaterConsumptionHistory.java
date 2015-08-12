@@ -37,6 +37,11 @@ public class WaterConsumptionHistory
                     "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
             };
 
+    public String[] getDAYS_OF_WEEK()
+    {
+        return DAYS_OF_WEEK;
+    }
+
     public String getCurrentWeek()
     {
         return _currentWeek;
