@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.zarate.jesus.drinkwater.Alarm.AlarmReceiverActivity;
 import com.zarate.jesus.drinkwater.Alarm.AlarmStarter;
 import com.zarate.jesus.drinkwater.R;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 import java.util.Calendar;
 
@@ -39,7 +40,9 @@ public class GraphActivity extends Activity
         setContentView(R.layout.activity_graph);
 
         // This is midnight -> 0 hour 0 minute 0 second
-        AlarmStarter.setAlarmByHour(this, 12345, 0, 0, 0);
+        //AlarmStarter.setAlarmByHour(this, 12345, 0, 0, 0);
+        WaterConsumptionHistory.getInstance().addDay(this, 40);
+
         //AlarmStarter.setAlarmByTimer(this, 12345, 1);
 
         _drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

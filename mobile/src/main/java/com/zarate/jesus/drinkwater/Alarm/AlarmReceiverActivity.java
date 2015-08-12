@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import com.zarate.jesus.drinkwater.Graph.GraphActivity;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.User;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +39,12 @@ public class AlarmReceiverActivity extends Activity
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        User.getInstance().setWeight(8);
-        User.getInstance().setCupSize(10000);
+
+        //User.getInstance().setWeight(8);
+        //User.getInstance().setCupSize(10000);
+
+        // Save the data for the day.
+        WaterConsumptionHistory.getInstance().addDay(this, (int)User.getInstance().getTotalWaterConsumption());
 
         SavingAndLoading.SaveState(getFilesDir());
 

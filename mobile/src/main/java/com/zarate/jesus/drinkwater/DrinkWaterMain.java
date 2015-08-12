@@ -67,13 +67,13 @@ public class DrinkWaterMain extends Activity
             {
                 try
                 {
-                    String weekDay;
-                    SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.US);
-
-                    Calendar calendar = Calendar.getInstance();
-                    weekDay = dayFormat.format(calendar.getTime());
-
-                    Toast.makeText(DrinkWaterMain.this, weekDay, Toast.LENGTH_LONG).show();
+//                    String weekDay;
+//                    SimpleDateFormat dayFormat = new SimpleDateFormat("E", Locale.US);
+//
+//                    Calendar calendar = Calendar.getInstance();
+//                    weekDay = dayFormat.format(calendar.getTime());
+//
+//                    Toast.makeText(DrinkWaterMain.this, weekDay, Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
