@@ -21,6 +21,7 @@ import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
 import com.zarate.jesus.drinkwater.Graph.GraphActivity;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -50,6 +51,12 @@ public class DrinkWaterMain extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // Add water consumption for testing purposes
+        WaterConsumptionHistory.getInstance().addDay(48);
+        // Save the water consumption for testing purposes
+        File filesDir = getFilesDir();
+        SavingAndLoading.SaveWCHState(filesDir);
 
         final PaintWater rootLayout = new PaintWater(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);

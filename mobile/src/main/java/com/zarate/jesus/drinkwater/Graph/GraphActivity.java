@@ -16,7 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zarate.jesus.drinkwater.R;
+import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
+
+import java.io.File;
 
 public class GraphActivity extends Activity
 {
@@ -32,7 +35,6 @@ public class GraphActivity extends Activity
 
         // This is midnight -> 0 hour 0 minute 0 second
         //AlarmStarter.setAlarmByHour(this, 12345, 0, 0, 0);
-        WaterConsumptionHistory.getInstance().addDay(48);
 
         //AlarmStarter.setAlarmByTimer(this, 12345, 1);
 
@@ -90,6 +92,22 @@ public class GraphActivity extends Activity
         {
             Log.e("action bar", e.toString());
         }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        File filesDir = getFilesDir();
+        SavingAndLoading.LoadState(filesDir);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        File filesDir = getFilesDir();
+        SavingAndLoading.SaveState(filesDir);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -52,9 +53,12 @@ public class WaterConsumptionHistory
         return _currentWeekTagName;
     }
 
-    public HashMap<String, Day> getCurrentWeek()
+    public ArrayList<Day> getCurrentWeek()
     {
-        return _weeks.get(getCurrentWeekTagName()).week;
+        if(_weeks.containsKey(getCurrentWeekTagName()))
+            return _weeks.get(getCurrentWeekTagName()).week;
+
+        return null;
     }
 
     public void addDay(int waterAmount)
@@ -96,7 +100,8 @@ public class WaterConsumptionHistory
             _weeks.put(_currentWeekTagName, week);
 
         }
-        _weeks.get(_currentWeekTagName).week.put(weekDay, day);
+        _weeks.get(_currentWeekTagName).week.add(day);
+        //_weeks.get(_currentWeekTagName).week.put(weekDay, day);
     }
 
     public int getDayOfWeek(String day)
@@ -115,7 +120,8 @@ public class WaterConsumptionHistory
     public int getDayWaterAmount(int DayOfWeek)
     {
         String day = DAYS_OF_WEEK[DayOfWeek];
-        return _weeks.get(_currentWeekTagName).week.get(day).waterAmount;
+        return _weeks.get(_currentWeekTagName).week.get(DayOfWeek).waterAmount;
+        //return _weeks.get(_currentWeekTagName).week.get(day).waterAmount;
     }
 
     /**
@@ -123,7 +129,8 @@ public class WaterConsumptionHistory
      */
     class Week
     {
-        HashMap<String, Day> week = new HashMap<>();
+        ArrayList<Day> week = new ArrayList<>();
+        //HashMap<String, Day> week = new HashMap<>();
     }
 
     /**

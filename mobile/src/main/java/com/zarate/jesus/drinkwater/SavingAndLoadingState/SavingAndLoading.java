@@ -44,6 +44,25 @@ public class SavingAndLoading
         }
     }
 
+    public static void SaveWCHState(File filesDir)
+    {
+        Gson _gson = new Gson();
+
+        WaterConsumptionHistory WCH = WaterConsumptionHistory.getInstance();
+
+        String jsonWCH = _gson.toJson(WCH);
+
+        try
+        {
+            File file = new File(filesDir, "water-consumption-history.txt");
+            saveFile(file, jsonWCH);
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static void LoadState(File filesDir)
     {
         Gson _gson = new Gson();
@@ -59,6 +78,8 @@ public class SavingAndLoading
             e.printStackTrace();
         }
     }
+
+
 
     private static void saveFile(File file, String jsonString) throws IOException
     {

@@ -7,13 +7,16 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 
 import com.zarate.jesus.drinkwater.User;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.Day;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  *
@@ -93,31 +96,42 @@ public class GraphView extends View
         }
 
         //Todo: May want to change this to a list instead of a hashmap
-        HashMap<String, Day> week = WaterConsumptionHistory.getInstance().getCurrentWeek();
+        ArrayList<Day> week = WaterConsumptionHistory.getInstance().getCurrentWeek();
 
-        for(Day day : week.values()){
-            int radius = 35;
+        if(week != null)
+        {
+            for (Day day : week)
+            {
+                int radius = 35;
 
-            drawPoint(canvas, radius, day);
+                drawPoint(canvas, radius, day);
+            }
         }
     }
 
     public void drawPoint(Canvas canvas, int radius, Day day)
     {
-        int waterAmount = day.waterAmount;
+        try
+        {
+            int waterAmount = day.waterAmount;
 
-        int x = day.dayOfWeek + 1; // Plus one for alignment purposes.
+            int x = day.dayOfWeek + 1; // Plus one for alignment purposes.
 
-        x = (int) _graphPoints.getxPoints().get(x).getX();
-        float y = _graphPoints.getY().get(waterAmount) + _yPadding;
+            x = (int) _graphPoints.getxPoints().get(x).getX();
+            float y = _graphPoints.getY().get(waterAmount) + _yPadding;
 
-        _paint.setColor(Color.WHITE);
-        canvas.drawCircle(x, y, radius, _paint);
+            _paint.setColor(Color.WHITE);
+            canvas.drawCircle(x, y, radius, _paint);
 
-        String text = waterAmount+"";
-        _paint.getTextBounds(text, 0, text.length(), _textBounds);
-        _paint.setColor(Color.BLACK);
-        canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
+            String text = waterAmount + "";
+            _paint.getTextBounds(text, 0, text.length(), _textBounds);
+            _paint.setColor(Color.BLACK);
+            canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
+        }
+        catch (Exception e)
+        {
+            Log.e("drawPoint Error: ", e.toString());
+        }
     }
 }
 
