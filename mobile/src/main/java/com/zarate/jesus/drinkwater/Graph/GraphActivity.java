@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zarate.jesus.drinkwater.R;
-import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
 
 public class GraphActivity extends Activity
 {
@@ -32,7 +32,7 @@ public class GraphActivity extends Activity
 
         // This is midnight -> 0 hour 0 minute 0 second
         //AlarmStarter.setAlarmByHour(this, 12345, 0, 0, 0);
-        WaterConsumptionHistory.getInstance().addDay(40);
+        WaterConsumptionHistory.getInstance().addDay(48);
 
         //AlarmStarter.setAlarmByTimer(this, 12345, 1);
 
@@ -44,7 +44,7 @@ public class GraphActivity extends Activity
 
         TextView textView = new TextView(this);
         //textView.setText("August 02 - August 09");
-        textView.setText(WaterConsumptionHistory.getInstance().getCurrentWeek());
+        textView.setText(WaterConsumptionHistory.getInstance().getCurrentWeekTagName());
         textView.setTextSize(25);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setBackgroundColor(Color.parseColor("#009788"));

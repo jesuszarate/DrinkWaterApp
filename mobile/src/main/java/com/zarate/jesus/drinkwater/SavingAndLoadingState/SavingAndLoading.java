@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
-import com.zarate.jesus.drinkwater.WaterConsumptionHistory;
+import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
 
 
 /**

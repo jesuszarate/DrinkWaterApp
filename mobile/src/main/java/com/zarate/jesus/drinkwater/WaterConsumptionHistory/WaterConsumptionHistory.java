@@ -1,4 +1,4 @@
-package com.zarate.jesus.drinkwater;
+package com.zarate.jesus.drinkwater.WaterConsumptionHistory;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,7 +30,7 @@ public class WaterConsumptionHistory
     {
     }
 
-    String _currentWeek;
+    String _currentWeekTagName;
     HashMap<String, Week> _weeks = new HashMap<>();
     String[] MONTHS = new String[]
             {
@@ -47,9 +47,14 @@ public class WaterConsumptionHistory
         return DAYS_OF_WEEK;
     }
 
-    public String getCurrentWeek()
+    public String getCurrentWeekTagName()
     {
-        return _currentWeek;
+        return _currentWeekTagName;
+    }
+
+    public HashMap<String, Day> getCurrentWeek()
+    {
+        return _weeks.get(getCurrentWeekTagName()).week;
     }
 
     public void addDay(int waterAmount)
@@ -67,47 +72,50 @@ public class WaterConsumptionHistory
         int date = calendar.get(Calendar.DATE);
         if (weekDay.equals("Mon"))
         {
-            _currentWeek = month + " " + date;
+            _currentWeekTagName = month + " " + date;
             Week week = new Week();
-            _weeks.put(_currentWeek, week);
+            _weeks.put(_currentWeekTagName, week);
         }
 
         Day day = new Day();
-        day.dayOfWeek = weekDay;
+        day.dayOfWeek = getDayOfWeek(weekDay);
         day.date = date;
         day.month = month;
         day.year = calendar.get(Calendar.YEAR);
         day.waterAmount = waterAmount;
 
-        if (!_weeks.containsKey(_currentWeek))
+        if (!_weeks.containsKey(_currentWeekTagName))
         {
             // Get this weeks Monday
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
             month = MONTHS[calendar.get(Calendar.MONTH)];
             date = calendar.get(Calendar.DATE);
-            _currentWeek = month + " " + date;
+            _currentWeekTagName = month + " " + date;
 
             Week week = new Week();
-            _weeks.put(_currentWeek, week);
+            _weeks.put(_currentWeekTagName, week);
 
         }
-        _weeks.get(_currentWeek).week.put(weekDay, day);
+        _weeks.get(_currentWeekTagName).week.put(weekDay, day);
+    }
+
+    public int getDayOfWeek(String day)
+    {
+        for(int i = 0; i < DAYS_OF_WEEK.length; i++)
+        {
+            if(DAYS_OF_WEEK[i].equals(day))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     // Only works with current week for now.
     public int getDayWaterAmount(int DayOfWeek)
     {
         String day = DAYS_OF_WEEK[DayOfWeek];
-        return _weeks.get(_currentWeek).week.get(day).waterAmount;
-    }
-
-    class Day
-    {
-        public String dayOfWeek;
-        public int waterAmount;
-        public String month;
-        public int year;
-        public int date;
+        return _weeks.get(_currentWeekTagName).week.get(day).waterAmount;
     }
 
     /**

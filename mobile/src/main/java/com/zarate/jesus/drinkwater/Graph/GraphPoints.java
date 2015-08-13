@@ -11,20 +11,20 @@ public class GraphPoints
     private HashMap<Integer, Point> yPoints = new HashMap<>();
     private HashMap<Integer, Float> y = new HashMap<>();
 
-    private static GraphPoints _instance;
+//    private static GraphPoints _instance;
 
-    private GraphPoints()
+    public GraphPoints()
     {
     }
 
-    public static GraphPoints getInstance()
-    {
-        if(_instance == null)
-        {
-            _instance = new GraphPoints();
-        }
-        return _instance;
-    }
+//    public static GraphPoints getInstance()
+//    {
+//        if(_instance == null)
+//        {
+//            _instance = new GraphPoints();
+//        }
+//        return _instance;
+//    }
 
     public HashMap<Integer, Float> getY()
     {
