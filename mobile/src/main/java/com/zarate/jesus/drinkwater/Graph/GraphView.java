@@ -14,7 +14,6 @@ import com.zarate.jesus.drinkwater.WaterConsumptionHistory.Day;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  *
@@ -60,7 +59,7 @@ public class GraphView extends View
         int widthSpacing = getWidth() / graphWidth;
 
         int waterAmount = User.getInstance().getTotalWaterNeeded();
-        int increaseAmount = waterAmount / 10;//User.getInstance().getCupSize();
+        int increaseAmount = waterAmount / 10;
 
         for (int i = 0; i < graphHeight; i++)
         {
@@ -70,8 +69,6 @@ public class GraphView extends View
 
             _graphPoints.getyPoints().put(i, _point);
             _graphPoints.getY().put(waterAmount, (float)(i * heightSpacing));
-//            GraphPoints.getInstance().getyPoints().put(i, _point);
-//            GraphPoints.getInstance()
 
             canvas.drawText(waterAmount+"",
                     _point.getX(),
@@ -88,7 +85,6 @@ public class GraphView extends View
 
 
             _graphPoints.getxPoints().put(i, _point);
-            //GraphPoints.getInstance().getxPoints().put(i, _point);
 
             canvas.drawText(_days[i],
                     _point.getX() - 30,
@@ -122,17 +118,6 @@ public class GraphView extends View
         _paint.getTextBounds(text, 0, text.length(), _textBounds);
         _paint.setColor(Color.BLACK);
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);
-    }
-
-    public int getDayIndex(String day)
-    {
-        String[] days = WaterConsumptionHistory.getInstance().getDAYS_OF_WEEK();
-        for(int i = 0; i < day.length(); i++)
-        {
-            if(days[i].equals(day))
-                return i + 1;
-        }
-        return -1;
     }
 }
 
