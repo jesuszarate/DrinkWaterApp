@@ -43,13 +43,14 @@ public class RoundTextView extends View
         _paint.setTextSize(100);
         _paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         String text = User.getInstance().getTotalWaterConsumption() + " oz";
+        _paint.getTextBounds(text, 0, text.length(), _textBounds);
+
         canvas.drawText(text,
-                calculateCenterX(text, _paint.getTextSize()),
-                calculateCenterY(text, _paint.getTextSize()),
+                _contentRect.centerX() - _textBounds.exactCenterX(),
+                _contentRect.centerY() - _textBounds.exactCenterY(),
                 _paint);
 
         // Water percentage indicator
-        //_paint.setColor(Color.parseColor("#33009788"));
         _paint.setColor(Color.TRANSPARENT);
         int radius = 150;
         float x = _contentRect.right/2;
@@ -75,25 +76,5 @@ public class RoundTextView extends View
         heightMeasureSpec = heightMeasureSpec - 100;
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    private float calculateCenterX(String s, float textSize)
-    {
-        float centerOfString = (float)Math.abs(s.length() / 3.8);
-        float centerOfText = (textSize * centerOfString);
-
-        int center = (getWidth() / 2);
-
-        return center - centerOfText;
-    }
-
-    private float calculateCenterY(String s, float textSize)
-    {
-        //float centerOfString = Math.abs(s.length() / 2);
-        float centerOfText = (float)(textSize/3);
-
-        int center = (getHeight() / 2);
-
-        return center + centerOfText;
     }
 }
