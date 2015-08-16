@@ -141,12 +141,20 @@ public class RoundButton extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
+        int padding = getPaddingBottom();
+        if(padding < getPaddingRight())
+            padding = getPaddingRight();
+        if(padding < getPaddingTop())
+            padding = getPaddingTop();
+        if(padding < getPaddingLeft())
+            padding = getPaddingLeft();
+
         if(widthMeasureSpec > heightMeasureSpec)
             widthMeasureSpec = heightMeasureSpec;
         else
             heightMeasureSpec = widthMeasureSpec;
         //widthMeasureSpec  = heightMeasureSpec;
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec - padding, heightMeasureSpec - padding);
     }
 
     private float calculateCenterX(String s, float textSize)

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -66,6 +67,8 @@ public class DrinkWaterMain extends Activity
         LinearLayout settingSection = new LinearLayout(this);
 
         RoundButton settings = new RoundButton(this);
+        settings.setPadding(20,20,20,20);
+        settings.setElevation(20);
         settings.setImage(R.mipmap.ic_menu_preferences);
         settings.setOnClickListener(new View.OnClickListener()
         {
@@ -102,6 +105,8 @@ public class DrinkWaterMain extends Activity
         // Analysis Section
         LinearLayout analysisSection = new LinearLayout(this);
         RoundButton analysisButton = new RoundButton(this);
+        analysisButton.setElevation(20);
+        analysisButton.setPadding(20,20,20,20);
         analysisButton.setText("Analysis");
         analysisButton.setOnClickListener(new View.OnClickListener()
         {
@@ -121,14 +126,22 @@ public class DrinkWaterMain extends Activity
         LinearLayout percentageSection = new LinearLayout(this);
         final RoundTextView consumptionIndicator = new RoundTextView(this);
         consumptionIndicator.setBackgroundResource(R.drawable.oval_ripple);
-        consumptionIndicator.setElevation(50);
+        //consumptionIndicator.setElevation(50);
 
-        percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        layoutParams.gravity = Gravity.BOTTOM;
+        percentageSection.addView(new RoundButton(this), layoutParams);
         percentageSection.addView(consumptionIndicator, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        layoutParams = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        layoutParams.gravity = Gravity.BOTTOM;
+        percentageSection.addView(new RoundButton(this), layoutParams);
+//                new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.MATCH_PARENT, 1));
+//        percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Water Buttons
         LinearLayout WaterButtonSection = new LinearLayout(this);
@@ -136,7 +149,6 @@ public class DrinkWaterMain extends Activity
         RoundButton RemoveButton = new RoundButton(this);
 
         View view = new View(this);
-        //view.setBackgroundColor(Color.BLACK);
         WaterButtonSection.addView(view, new LinearLayout.LayoutParams(0,
         ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
@@ -156,8 +168,13 @@ public class DrinkWaterMain extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 2));
 
         AddButton.setText(R.string.add_water);
+        AddButton.setPadding(20,20,20,20);
+        AddButton.setElevation(20);
         AddButton.setTextSize(100);
+
         RemoveButton.setText(R.string.remove_water);
+        RemoveButton.setPadding(20,20,20,20);
+        RemoveButton.setElevation(20);
         RemoveButton.setTextSize(100);
 
         AddButton.setOnClickListener(new View.OnClickListener()

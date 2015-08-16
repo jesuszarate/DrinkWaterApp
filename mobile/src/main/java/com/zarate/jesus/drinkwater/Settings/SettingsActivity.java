@@ -148,6 +148,8 @@ public class SettingsActivity extends Activity
         // Submit/Cancel Section
         LinearLayout submitSection = new LinearLayout(this);
         RoundButton submitButton = new RoundButton(this);
+        submitButton.setPadding(20,20,20,20);
+        submitButton.setElevation(20);
         submitButton.setText("Submit");
         submitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -179,6 +181,8 @@ public class SettingsActivity extends Activity
         });
 
         RoundButton cancelButton = new RoundButton(this);
+        cancelButton.setPadding(20,20,20,20);
+        cancelButton.setElevation(20);
         cancelButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -48,9 +48,9 @@ public class RoundTextView extends View
                 calculateCenterY(text, _paint.getTextSize()),
                 _paint);
 
-
         // Water percentage indicator
-        _paint.setColor(Color.parseColor("#33009788"));
+        //_paint.setColor(Color.parseColor("#33009788"));
+        _paint.setColor(Color.TRANSPARENT);
         int radius = 150;
         float x = _contentRect.right/2;
         float y = _contentRect.top + radius;
