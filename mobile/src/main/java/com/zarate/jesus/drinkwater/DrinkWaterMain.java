@@ -126,22 +126,25 @@ public class DrinkWaterMain extends Activity
         LinearLayout percentageSection = new LinearLayout(this);
         final RoundTextView consumptionIndicator = new RoundTextView(this);
         consumptionIndicator.setBackgroundResource(R.drawable.oval_ripple);
-        //consumptionIndicator.setElevation(50);
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 1);
+
+        RoundButton removeAmountIndicator = new RoundButton(this);
+        removeAmountIndicator.setTextSize(50);
+        removeAmountIndicator.setText("1\n" + "25 oz");
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         layoutParams.gravity = Gravity.BOTTOM;
-        percentageSection.addView(new RoundButton(this), layoutParams);
+        percentageSection.addView(removeAmountIndicator, layoutParams);
+
         percentageSection.addView(consumptionIndicator, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        layoutParams = new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 1);
+
+        RoundButton addAmountIndicator = new RoundButton(this);
+        addAmountIndicator.setTextSize(50);
+        addAmountIndicator.setText("2\n" + "25 oz");
+        layoutParams = new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.MATCH_PARENT, 1);
         layoutParams.gravity = Gravity.BOTTOM;
-        percentageSection.addView(new RoundButton(this), layoutParams);
-//                new LinearLayout.LayoutParams(0,
-//                ViewGroup.LayoutParams.MATCH_PARENT, 1));
-//        percentageSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        percentageSection.addView(addAmountIndicator, layoutParams);
+
 
         // Water Buttons
         LinearLayout WaterButtonSection = new LinearLayout(this);
@@ -156,14 +159,12 @@ public class DrinkWaterMain extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         View view1 = new View(this);
-        //view1.setBackgroundColor(Color.BLACK);
         WaterButtonSection.addView(view1, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         WaterButtonSection.addView(AddButton, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         View view2 = new View(this);
-        //view2.setBackgroundColor(Color.BLACK);
         WaterButtonSection.addView(view2, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 2));
 
