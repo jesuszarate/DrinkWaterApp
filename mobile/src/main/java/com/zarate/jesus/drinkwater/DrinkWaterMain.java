@@ -133,7 +133,7 @@ public class DrinkWaterMain extends Activity
         removeAmountIndicator.setText("1\n" + "25 oz");
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         layoutParams.gravity = Gravity.BOTTOM;
-        percentageSection.addView(removeAmountIndicator, layoutParams);
+        percentageSection.addView(new Space(this), layoutParams);
 
         percentageSection.addView(consumptionIndicator, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -143,7 +143,7 @@ public class DrinkWaterMain extends Activity
         addAmountIndicator.setText("2\n" + "25 oz");
         layoutParams = new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.MATCH_PARENT, 1);
         layoutParams.gravity = Gravity.BOTTOM;
-        percentageSection.addView(addAmountIndicator, layoutParams);
+        percentageSection.addView(new Space(this), layoutParams);
 
 
         // Water Buttons

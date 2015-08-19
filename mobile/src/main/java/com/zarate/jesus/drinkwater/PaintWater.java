@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 public class PaintWater extends LinearLayout
 {
     double WATER_AMOUNT = 0;
+    private Rect _textBounds = new Rect();
 
     public interface OnWaterTouchListener
     {
@@ -67,9 +69,9 @@ public class PaintWater extends LinearLayout
 
         public void draw(Canvas canvas)
         {
-            Paint polylinePaint = new Paint();
-            polylinePaint.setStrokeWidth(5.0f);
-            polylinePaint.setColor(Color.parseColor("#80DEEA"));
+            Paint paint = new Paint();
+            paint.setStrokeWidth(5.0f);
+            paint.setColor(Color.parseColor("#80DEEA"));
             //polylinePaint.setColor(Color.parseColor("#88FFFF"));
 
             RectF area = new RectF();
@@ -78,7 +80,32 @@ public class PaintWater extends LinearLayout
             area.right = ((getWidth() - getPaddingRight()));
             area.bottom = ((getHeight() - getPaddingBottom()));
 
-            canvas.drawRect(area.left, area.top, area.right, area.bottom, polylinePaint);
+            canvas.drawRect(area.left, area.top, area.right, area.bottom, paint);
+
+            paint.setColor(Color.parseColor("#009788"));
+            float x = area.left + 50;
+            float y = area.top;
+            int radius = 50;
+
+
+            // Ensures that the circle indicator doesn't go out of bounds
+            if(y >= getHeight())
+                y = y - radius;
+            if(y <= 0)
+                y = radius;
+
+            canvas.drawCircle(x, y, radius, paint);
+
+            String line = "5";
+            paint.setColor(Color.WHITE);
+            paint.setTextSize(50);
+            paint.getTextBounds("5", 0, line.length(), _textBounds);
+
+            canvas.drawText(line,
+                    x - _textBounds.exactCenterX(),
+                    y - _textBounds.exactCenterY(),
+                    paint);
+
         }
 
         @Override
