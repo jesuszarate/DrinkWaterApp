@@ -1,10 +1,16 @@
 package com.zarate.jesus.drinkwater.Graph;
 
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.zarate.jesus.drinkwater.R;
 
 import java.util.ArrayList;
 
@@ -13,7 +19,7 @@ import java.util.ArrayList;
  */
 public class GraphAdapter implements ListAdapter
 {
-    ArrayList<String> graphs = graphs = new ArrayList<>();
+    ArrayList<String> graphs = new ArrayList<>();
 
     public GraphAdapter(){
         graphs.add("Scatter");
@@ -72,9 +78,20 @@ public class GraphAdapter implements ListAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
+        LinearLayout rootLayout = new LinearLayout(parent.getContext());
+
+        ImageView imageView = new ImageView(parent.getContext());
+        imageView.setBackgroundResource(R.drawable.common_signin_btn_icon_dark);
+
         TextView textView = new TextView(parent.getContext());
         textView.setText(graphs.get(position));
-        return textView;
+        textView.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+        textView.setTextColor(Color.WHITE);
+
+        rootLayout.addView(imageView);
+        rootLayout.addView(textView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        return rootLayout;
     }
 
     @Override

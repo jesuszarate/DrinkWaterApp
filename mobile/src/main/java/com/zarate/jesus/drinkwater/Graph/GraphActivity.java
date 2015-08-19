@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class GraphActivity extends Activity
         _drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         _listView = (ListView) findViewById(R.id.left_drawer);
         _listView.setAdapter(new GraphAdapter());
+        _drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
 
         LinearLayout contentLayout = (LinearLayout) findViewById(R.id.content_Layout);
         contentLayout.setOrientation(LinearLayout.VERTICAL);
