@@ -120,10 +120,11 @@ public class RoundButton extends View
         _paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
 
+        // Allows for newlines to be supported
         if(text != null && !text.isEmpty())
         {
-            int y = 0;//(int)_paint.getTextSize();
-            //int x = (int)_paint.getTextSize();//(int)_paint.getTextScaleX();
+            int y = 0;
+
             for (String line : text.split("\n")) {
                 _paint.getTextBounds(line, 0, line.length(), _textBounds);
 
@@ -131,9 +132,7 @@ public class RoundButton extends View
                         _contentRect.centerX() - _textBounds.exactCenterX(),
                         _contentRect.centerY() - _textBounds.exactCenterY() + y,
                         _paint);
-
-                //x += (int)_paint.getTextScaleX();
-                y += _paint.getTextSize();//_paint.descent() - _paint.ascent();
+                y += _paint.getTextSize();
             }
 
         }

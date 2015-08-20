@@ -42,7 +42,8 @@ public class RoundTextView extends View
         _paint.setColor(Color.WHITE);
         _paint.setTextSize(100);
         _paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        String text = User.getInstance().getTotalWaterConsumption() + " oz";
+//        String text = User.getInstance().getTotalWaterConsumption() + " oz";
+        String text = decimalFormat.format(User.getInstance().getTotalWaterPercentage()) + "%";
         _paint.getTextBounds(text, 0, text.length(), _textBounds);
 
         canvas.drawText(text,
@@ -53,12 +54,13 @@ public class RoundTextView extends View
         // Water percentage indicator
         _paint.setColor(Color.TRANSPARENT);
         int radius = 150;
-        float x = _contentRect.right/2;
+        float x = _contentRect.right / 2;
         float y = _contentRect.top + radius;
         canvas.drawCircle(x, y, radius, _paint);
 
-        text = decimalFormat.format(User.getInstance().getTotalWaterPercentage()) + "%";
-        _paint.setTextSize(70);
+//        text = decimalFormat.format(User.getInstance().getTotalWaterPercentage()) + "%";
+        text = "Cup " + User.getInstance().getCupSize() + " oz";
+        _paint.setTextSize(50);
         _paint.getTextBounds(text, 0, text.length(), _textBounds);
         _paint.setColor(Color.WHITE);
         canvas.drawText(text, x - _textBounds.exactCenterX(), y - _textBounds.exactCenterY(), _paint);

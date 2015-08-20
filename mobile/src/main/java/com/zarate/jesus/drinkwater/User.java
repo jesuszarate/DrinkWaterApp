@@ -58,6 +58,8 @@ public class User
     private double _percentagePortion = 0;
     private int reminderTime = 15; // In minutes
     private int totalWaterNeeded = 64;
+    private int _cupsConsumed = 0;
+
     private Stack<Double> TotalWaterConsumptionStack = new Stack<>();
     private Stack<Double> TotalWaterPercentageStack = new Stack<>();
 
@@ -92,6 +94,16 @@ public class User
     public void set_activityLevel(ActivityLevel _activityLevel)
     {
         this._activityLevel = _activityLevel;
+    }
+
+    public int get_cupsConsumed()
+    {
+        return _cupsConsumed;
+    }
+
+    public void set_cupsConsumed(int _cupsConsumed)
+    {
+        this._cupsConsumed = _cupsConsumed;
     }
 
     public String get_name()

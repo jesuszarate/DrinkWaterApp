@@ -83,9 +83,10 @@ public class PaintWater extends LinearLayout
             canvas.drawRect(area.left, area.top, area.right, area.bottom, paint);
 
             paint.setColor(Color.parseColor("#009788"));
-            float x = area.left + 50;
+            int radius = 60;
+            float x = area.left + radius;
             float y = area.top;
-            int radius = 50;
+
 
 
             // Ensures that the circle indicator doesn't go out of bounds
@@ -96,15 +97,29 @@ public class PaintWater extends LinearLayout
 
             canvas.drawCircle(x, y, radius, paint);
 
-            String line = "5";
+            String text = User.getInstance().getTotalWaterConsumption()+"\noz";
             paint.setColor(Color.WHITE);
-            paint.setTextSize(50);
-            paint.getTextBounds("5", 0, line.length(), _textBounds);
+            paint.setTextSize(40);
+            //paint.getTextBounds(text, 0, text.length(), _textBounds);
 
-            canvas.drawText(line,
-                    x - _textBounds.exactCenterX(),
-                    y - _textBounds.exactCenterY(),
-                    paint);
+//            canvas.drawText(text,
+//                    x - _textBounds.exactCenterX(),
+//                    y - _textBounds.exactCenterY(),
+//                    paint);
+
+            if(!text.isEmpty())
+            {
+                for (String line : text.split("\n")) {
+                    paint.getTextBounds(line, 0, line.length(), _textBounds);
+
+                    canvas.drawText(line,
+                           x - _textBounds.exactCenterX(),
+                           y - _textBounds.exactCenterY(),
+                           paint);
+                    y += paint.getTextSize();
+                }
+
+            }
 
         }
 
