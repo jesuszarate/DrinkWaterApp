@@ -1,6 +1,7 @@
 package com.zarate.jesus.drinkwater;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Stack;
@@ -188,6 +189,13 @@ public class User
 
         TotalWaterPercentage += _percentagePortion;
         TotalWaterConsumptionFill += amount;
+
+        boolean correctWaterAmount = true;
+        if(amount > 200)
+        {
+            return false;
+        }
+
         TotalWaterConsumption += cupSize;
         TotalWaterConsumptionStack.push((double)cupSize);
         TotalWaterPercentageStack.push(_percentagePortion);

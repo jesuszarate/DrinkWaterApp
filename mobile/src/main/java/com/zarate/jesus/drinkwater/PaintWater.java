@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * Created by Jesus Zarate on 7/26/15.
@@ -19,6 +20,8 @@ public class PaintWater extends LinearLayout
 {
     double WATER_AMOUNT = 0;
     private Rect _textBounds = new Rect();
+
+    private Context _context = null;
 
     public interface OnWaterTouchListener
     {
@@ -40,6 +43,7 @@ public class PaintWater extends LinearLayout
     public PaintWater(Context context)
     {
         super(context);
+        _context = context;
         setFocusable(true);
     }
 
@@ -55,7 +59,10 @@ public class PaintWater extends LinearLayout
     public void addWater()
     {
         if (User.getInstance().addWater(getHeight()))
+        {
             invalidate();
+            Toast.makeText(_context, "Drinking too much water is not good!", Toast.LENGTH_LONG);
+        }
     }
 
     public void removeWater()
