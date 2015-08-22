@@ -61,7 +61,7 @@ public class PaintWater extends LinearLayout
         if (User.getInstance().addWater(getHeight()))
         {
             invalidate();
-            Toast.makeText(_context, "Drinking too much water is not good!", Toast.LENGTH_LONG);
+            Toast.makeText(_context, "Drinking too much water is not good for you!", Toast.LENGTH_LONG);
         }
     }
 
