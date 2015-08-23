@@ -211,24 +211,16 @@ public class User
         double previousCupSize =
                 TotalWaterConsumptionStack.isEmpty() ? 0 : TotalWaterConsumptionStack.pop();
 
-        if (getCupSize() > 0)
-        {
-            //part = (totalWaterNeeded / previousCupSize);
-        }
-        else
-            Log.e("Error", "In User, method 'addWater(int height) cupSize is 0 and it's trying to divide by 0'");
-
         if (part > 0)
         {
             amount = height / part;
             _percentagePortion = 100 / part;
-            //_percentagePortion = totalWaterNeeded / part;
         } else
             Log.e("Error", "In User, method 'addWater(int height) part is 0 and it's trying to divide by 0'");
 
         if ((TotalWaterConsumptionFill) > 0)
         {
-            TotalWaterPercentage -= TotalWaterPercentageStack.isEmpty() ? 0 : TotalWaterPercentageStack.pop();//_percentagePortion;
+            TotalWaterPercentage -= TotalWaterPercentageStack.isEmpty() ? 0 : TotalWaterPercentageStack.pop();
             TotalWaterConsumptionFill -= amount;
             TotalWaterConsumption -= previousCupSize;
             return true;
