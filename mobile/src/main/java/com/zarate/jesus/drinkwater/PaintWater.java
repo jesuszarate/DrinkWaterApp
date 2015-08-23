@@ -79,11 +79,11 @@ public class PaintWater extends LinearLayout
             Paint paint = new Paint();
             paint.setStrokeWidth(5.0f);
             paint.setColor(Color.parseColor("#80DEEA"));
-            //polylinePaint.setColor(Color.parseColor("#88FFFF"));
 
             RectF area = new RectF();
             area.left = (getPaddingLeft());
             area.top = (int)(getHeight() - (User.getInstance().getTotalWaterConsumptionFill()));
+            //area.top = (int)(getHeight() - (User.getInstance().getTotalWaterConsumptionFill()));
             area.right = ((getWidth() - getPaddingRight()));
             area.bottom = ((getHeight() - getPaddingBottom()));
 
@@ -93,8 +93,6 @@ public class PaintWater extends LinearLayout
             int radius = 60;
             float x = area.left + radius;
             float y = area.top;
-
-
 
             // Ensures that the circle indicator doesn't go out of bounds
             if(y >= getHeight())
