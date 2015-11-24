@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
 import com.zarate.jesus.drinkwater.Graph.GraphActivity;
+import com.zarate.jesus.drinkwater.Network.NetworkClass;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
@@ -84,6 +85,9 @@ public class DrinkWaterMain extends Activity
 //                    weekDay = dayFormat.format(calendar.getTime());
 //
 //                    Toast.makeText(DrinkWaterMain.this, weekDay, Toast.LENGTH_LONG).show();
+
+                    NetworkClass networkClass = new NetworkClass();
+                    networkClass.initBattleGrid(DrinkWaterMain.this);
 
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
