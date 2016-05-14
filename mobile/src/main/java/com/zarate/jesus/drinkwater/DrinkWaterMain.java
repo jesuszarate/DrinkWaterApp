@@ -86,8 +86,10 @@ public class DrinkWaterMain extends Activity
 //
 //                    Toast.makeText(DrinkWaterMain.this, weekDay, Toast.LENGTH_LONG).show();
 
-                    NetworkClass networkClass = new NetworkClass();
-                    networkClass.initBattleGrid(DrinkWaterMain.this);
+
+                    //TODO: Network class
+                    //NetworkClass networkClass = new NetworkClass();
+                    //networkClass.initBattleGrid(DrinkWaterMain.this);
 
                     Intent intent = new Intent(DrinkWaterMain.this, SettingsActivity.class);
                     startActivity(intent);
@@ -108,23 +110,23 @@ public class DrinkWaterMain extends Activity
 
         // Analysis Section
         LinearLayout analysisSection = new LinearLayout(this);
-//        RoundButton analysisButton = new RoundButton(this);
-//        analysisButton.setElevation(20);
-//        analysisButton.setPadding(20,20,20,20);
-//        analysisButton.setText("Analysis");
-//        analysisButton.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                Intent analysisIntent = new Intent(DrinkWaterMain.this, GraphActivity.class);
-//                startActivity(analysisIntent);
-//            }
-//        });
-//        analysisSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-//        analysisSection.addView(analysisButton, new LinearLayout.LayoutParams(0,
-//                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        RoundButton analysisButton = new RoundButton(this);
+        analysisButton.setElevation(20);
+        analysisButton.setPadding(20,20,20,20);
+        analysisButton.setText("Analysis");
+        analysisButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent analysisIntent = new Intent(DrinkWaterMain.this, GraphActivity.class);
+                startActivity(analysisIntent);
+            }
+        });
+        analysisSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        analysisSection.addView(analysisButton, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
 
         // Percentage indicator Section
         LinearLayout percentageSection = new LinearLayout(this);
