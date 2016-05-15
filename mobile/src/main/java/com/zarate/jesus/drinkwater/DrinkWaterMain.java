@@ -15,12 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.Space;
-import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundTextView;
 import com.zarate.jesus.drinkwater.Graph.GraphActivity;
-import com.zarate.jesus.drinkwater.Network.NetworkClass;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.Settings.SettingsActivity;
 import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHistory;
@@ -28,7 +26,6 @@ import com.zarate.jesus.drinkwater.WaterConsumptionHistory.WaterConsumptionHisto
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -174,11 +171,13 @@ public class DrinkWaterMain extends Activity
         WaterButtonSection.addView(view2, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 2));
 
+        // Add water button
         AddButton.setText(R.string.add_water);
         AddButton.setPadding(20,20,20,20);
         AddButton.setElevation(20);
         AddButton.setTextSize(100);
 
+        // Remove water button
         RemoveButton.setText(R.string.remove_water);
         RemoveButton.setPadding(20,20,20,20);
         RemoveButton.setElevation(20);
@@ -223,7 +222,7 @@ public class DrinkWaterMain extends Activity
 
         setContentView(rootLayout);
 
-        timer.schedule(new SwitchPlayerTask(), getMinutes(User.getInstance().getReminderTime()));
+        timer.schedule(new TimerClass(), getMinutes(User.getInstance().getReminderTime()));
     }
 
     @Override
@@ -275,12 +274,12 @@ public class DrinkWaterMain extends Activity
         mNotifyMgr.notify(mNotificationId, _mBuilder.build());
     }
 
-    class SwitchPlayerTask extends TimerTask
+    class TimerClass extends TimerTask
     {
         public void run()
         {
             showNotification();
-            timer.schedule(new SwitchPlayerTask(), getMinutes(User.getInstance().getReminderTime()));
+            timer.schedule(new TimerClass(), getMinutes(User.getInstance().getReminderTime()));
         }
     }
 
