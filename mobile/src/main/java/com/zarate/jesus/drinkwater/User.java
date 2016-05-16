@@ -240,6 +240,11 @@ public class User
 
     public int getReminderTime()
     {
+        return calculateReminderTime();
+    }
+
+    public int calculateReminderTime()
+    {
         return reminderTime;
     }
 

@@ -1,8 +1,10 @@
 package com.zarate.jesus.drinkwater.Settings;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -34,6 +36,7 @@ public class SettingsActivity extends Activity
     TextView totalWaterNeeded;
     EditText waterNeededInput;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -119,6 +122,20 @@ public class SettingsActivity extends Activity
         params.setMargins(20, 0, 20, 0);
         cupSizeSection.addView(cupSize, params);
         cupSizeSection.addView(cupSizeInput, params);
+
+        LinearLayout startTimeSection = new LinearLayout(this);
+        final TextView startTime = new TextView(this);
+        startTime.setText("Start Time");
+        startTime.setTypeface(Typeface.DEFAULT_BOLD);
+        startTime.setTextColor(Color.WHITE);
+        final EditText startTimeInput = new EditText(this);
+        startTimeInput.setText("text");
+        cupSizeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        params = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        params.setMargins(20, 0, 20, 0);
+        startTimeSection.addView(startTime, params);
+        startTimeSection.addView(startTimeInput, params);
 
         // Reminder Frequency Section
         LinearLayout reminderFrequencySection = new LinearLayout(this);
@@ -215,6 +232,8 @@ public class SettingsActivity extends Activity
 
         rootLayout.addView(cupSizeSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+
+
 
         rootLayout.addView(reminderFrequencySection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
