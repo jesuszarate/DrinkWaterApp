@@ -253,6 +253,9 @@ public class SettingsActivity extends Activity
         rootLayout.addView(startTimeSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
+        rootLayout.addView(endTimeSection, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+
         rootLayout.addView(reminderFrequencySection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
