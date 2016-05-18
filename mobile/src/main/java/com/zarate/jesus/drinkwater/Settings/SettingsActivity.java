@@ -123,6 +123,7 @@ public class SettingsActivity extends Activity
         cupSizeSection.addView(cupSize, params);
         cupSizeSection.addView(cupSizeInput, params);
 
+        // Start Time Section
         LinearLayout startTimeSection = new LinearLayout(this);
         final TextView startTime = new TextView(this);
         startTime.setText("Start Time");
@@ -130,12 +131,28 @@ public class SettingsActivity extends Activity
         startTime.setTextColor(Color.WHITE);
         final EditText startTimeInput = new EditText(this);
         startTimeInput.setText("text");
-        cupSizeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        startTimeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
         startTimeSection.addView(startTime, params);
         startTimeSection.addView(startTimeInput, params);
+
+        // End Time Section
+        LinearLayout endTimeSection = new LinearLayout(this);
+        final TextView endTime = new TextView(this);
+        endTime.setText("End Time");
+        endTime.setTypeface(Typeface.DEFAULT_BOLD);
+        endTime.setTextColor(Color.WHITE);
+        final EditText endTimeInput = new EditText(this);
+        endTimeInput.setText("text");
+        endTimeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        params = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        params.setMargins(20, 0, 20, 0);
+        endTimeSection.addView(endTime, params);
+        endTimeSection.addView(endTimeInput, params);
+
 
         // Reminder Frequency Section
         LinearLayout reminderFrequencySection = new LinearLayout(this);
