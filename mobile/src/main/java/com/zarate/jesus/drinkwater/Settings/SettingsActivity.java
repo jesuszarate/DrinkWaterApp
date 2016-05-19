@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
@@ -135,6 +136,9 @@ public class SettingsActivity extends Activity
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
+
+        TimePicker startTimePicker = new TimePicker(this);
+        startTimeSection.addView(startTimePicker);
         startTimeSection.addView(startTime, params);
         startTimeSection.addView(startTimeInput, params);
 
