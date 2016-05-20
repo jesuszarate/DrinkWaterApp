@@ -137,10 +137,37 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
 
-        TimePicker startTimePicker = new TimePicker(this);
-        startTimeSection.addView(startTimePicker);
-        startTimeSection.addView(startTime, params);
-        startTimeSection.addView(startTimeInput, params);
+        RoundButton startTimeButton = new RoundButton(this);
+        startTimeButton.setPadding(20,20,20,20);
+        startTimeButton.setElevation(20);
+        startTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
+
+        RoundButton endTimeButton = new RoundButton(this);
+        endTimeButton.setPadding(20,20,20,20);
+        endTimeButton.setElevation(20);
+        endTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
+
+
+        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 2));
+        startTimeSection.addView(startTimeButton, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
+        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 4));
+        startTimeSection.addView(endTimeButton, new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
+        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.MATCH_PARENT, 3));
+
+        //startTimeSection.addView(startTimeButton);
+        //startTimeSection.addView(endTimeButton);
+
+        // TODO: Make an activity that will allow user to set the start and end time
+        //TimePicker startTimePicker = new TimePicker(this);
+        //startTimeSection.addView(startTimePicker);
+
+        //startTimeSection.addView(startTime, params);
+        //startTimeSection.addView(startTimeInput, params);
 
         // End Time Section
         LinearLayout endTimeSection = new LinearLayout(this);
