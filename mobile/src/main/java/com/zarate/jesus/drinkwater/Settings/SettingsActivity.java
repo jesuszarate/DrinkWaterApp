@@ -130,9 +130,8 @@ public class SettingsActivity extends Activity
         startTime.setText("Start Time");
         startTime.setTypeface(Typeface.DEFAULT_BOLD);
         startTime.setTextColor(Color.WHITE);
-        final EditText startTimeInput = new EditText(this);
-        startTimeInput.setText("text");
-        startTimeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+
+
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
@@ -142,22 +141,26 @@ public class SettingsActivity extends Activity
         startTimeButton.setElevation(20);
         startTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
 
+        startTimeSection.addView(startTime, params);
+        startTimeSection.addView(startTimeButton, params);
+
+
+        LinearLayout endTimeSection = new LinearLayout(this);
+
         RoundButton endTimeButton = new RoundButton(this);
         endTimeButton.setPadding(20,20,20,20);
         endTimeButton.setElevation(20);
         endTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
 
+        final TextView endTime = new TextView(this);
+        endTime.setText("End Time");
+        endTime.setTypeface(Typeface.DEFAULT_BOLD);
+        endTime.setTextColor(Color.WHITE);
 
-        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 2));
-        startTimeSection.addView(startTimeButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 3));
-        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 4));
-        startTimeSection.addView(endTimeButton, new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 3));
-        startTimeSection.addView(new Space(this), new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT, 3));
+        endTimeSection.addView(startTime, params);
+        endTimeSection.addView(startTimeButton, params);
+
+
 
         //startTimeSection.addView(startTimeButton);
         //startTimeSection.addView(endTimeButton);
