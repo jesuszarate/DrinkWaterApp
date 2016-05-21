@@ -169,23 +169,10 @@ public class SettingsActivity extends Activity
         //startTimeSection.addView(startTime, params);
         //startTimeSection.addView(startTimeInput, params);
 
-        // End Time Section
-        LinearLayout endTimeSection = new LinearLayout(this);
-        final TextView endTime = new TextView(this);
-        endTime.setText("End Time");
-        endTime.setTypeface(Typeface.DEFAULT_BOLD);
-        endTime.setTextColor(Color.WHITE);
-        final EditText endTimeInput = new EditText(this);
-        endTimeInput.setText("text");
-        endTimeInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        params = new LinearLayout.LayoutParams(0,
-                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
-        params.setMargins(20, 0, 20, 0);
-        endTimeSection.addView(endTime, params);
-        endTimeSection.addView(endTimeInput, params);
 
 
         // Reminder Frequency Section
+        /*
         LinearLayout reminderFrequencySection = new LinearLayout(this);
         final TextView reminderFrequency = new TextView(this);
         reminderFrequency.setText("Reminder Frequency");
@@ -209,6 +196,7 @@ public class SettingsActivity extends Activity
         reminderFrequencySection.addView(reminderFrequency, params);
         reminderFrequencySection.addView(new Space(this), params);
         reminderFrequencySection.addView(reminderSpinner, params);
+        */
 
         // Submit/Cancel Section
         LinearLayout submitSection = new LinearLayout(this);
@@ -234,8 +222,9 @@ public class SettingsActivity extends Activity
                     if (waterNeededInput != null && !waterNeededInput.getText().toString().isEmpty())
                         User.getInstance().setTotalWaterNeeded(Integer.parseInt(waterNeededInput.getText().toString()));
 
-                    int time = Integer.parseInt(reminderSpinner.getSelectedItem().toString());
-                    User.getInstance().setReminderTime(time);
+                    // Time Frequency
+                    //int time = Integer.parseInt(reminderSpinner.getSelectedItem().toString());
+                    //User.getInstance().setReminderTime(time);
 
                     finish();
                 } catch (Exception e)
@@ -284,11 +273,9 @@ public class SettingsActivity extends Activity
         rootLayout.addView(startTimeSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
-        rootLayout.addView(endTimeSection, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
-
-        rootLayout.addView(reminderFrequencySection, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+        // Time frequency
+        //rootLayout.addView(reminderFrequencySection, new LinearLayout.LayoutParams(
+        //        ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         rootLayout.addView(submitSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
