@@ -131,7 +131,6 @@ public class SettingsActivity extends Activity
         startTime.setTypeface(Typeface.DEFAULT_BOLD);
         startTime.setTextColor(Color.WHITE);
 
-
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         params.setMargins(20, 0, 20, 0);
@@ -139,7 +138,7 @@ public class SettingsActivity extends Activity
         RoundButton startTimeButton = new RoundButton(this);
         startTimeButton.setPadding(20,20,20,20);
         startTimeButton.setElevation(20);
-        startTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
+        startTimeButton.setText("12:00\na.m."); // TODO: Hook this button up to the start time given by the time setting activity
 
         startTimeSection.addView(startTime, params);
         startTimeSection.addView(startTimeButton, params);
@@ -150,15 +149,19 @@ public class SettingsActivity extends Activity
         RoundButton endTimeButton = new RoundButton(this);
         endTimeButton.setPadding(20,20,20,20);
         endTimeButton.setElevation(20);
-        endTimeButton.setText("12:00 a.m"); // TODO: Hook this button up to the start time given by the time setting activity
+        endTimeButton.setText("12:00\na.m."); // TODO: Hook this button up to the start time given by the time setting activity
+
+        params = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        params.setMargins(20, 0, 20, 0);
 
         final TextView endTime = new TextView(this);
         endTime.setText("End Time");
         endTime.setTypeface(Typeface.DEFAULT_BOLD);
         endTime.setTextColor(Color.WHITE);
 
-        endTimeSection.addView(startTime, params);
-        endTimeSection.addView(startTimeButton, params);
+        endTimeSection.addView(endTime, params);
+        endTimeSection.addView(endTimeButton, params);
 
 
 
@@ -274,6 +277,8 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         rootLayout.addView(startTimeSection, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
+        rootLayout.addView(endTimeSection, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         // Time frequency
