@@ -5,8 +5,8 @@
     <!-- <application -->
     <!-- android:theme="@android:style/Theme.Holo.Light"/> -->
     <!-- android:theme="@style/AppTheme" -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission  android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -35,6 +35,10 @@
         <activity
             android:name=".Alarm.AlarmReceiverActivity"
             android:label="@string/title_activity_alarm" >
+        </activity>
+        <activity
+            android:name=".Settings.StartEndTime.StartEndTimeActivity"
+            android:label="@string/title_activity_start_end_time" >
         </activity>
     </application>
 

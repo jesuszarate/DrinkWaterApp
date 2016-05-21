@@ -2,6 +2,7 @@ package com.zarate.jesus.drinkwater.Settings;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
 import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
+import com.zarate.jesus.drinkwater.Settings.StartEndTime.StartEndTimeActivity;
 import com.zarate.jesus.drinkwater.TransparentLinearLayout;
 import com.zarate.jesus.drinkwater.User;
 
@@ -139,6 +141,17 @@ public class SettingsActivity extends Activity
         startTimeButton.setPadding(20,20,20,20);
         startTimeButton.setElevation(20);
         startTimeButton.setText("12:00\na.m."); // TODO: Hook this button up to the start time given by the time setting activity
+
+        startTimeButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
+                startActivity(seTimeIntent);
+                Log.d("here", "here");
+            }
+        });
 
         startTimeSection.addView(startTime, params);
         startTimeSection.addView(startTimeButton, params);

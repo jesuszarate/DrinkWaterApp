@@ -24,5 +24,8 @@
 
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
+    <string name="title_activity_start_end_time">StartEndTimeActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
