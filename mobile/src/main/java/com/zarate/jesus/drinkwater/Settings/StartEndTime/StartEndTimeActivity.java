@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +17,10 @@ import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
+import com.zarate.jesus.drinkwater.SavingAndLoadingState.SavingAndLoading;
 import com.zarate.jesus.drinkwater.User;
+
+import java.io.File;
 
 public class StartEndTimeActivity extends Activity//ActionBarActivity
 {
@@ -30,7 +34,7 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-        TimePicker timePicker = new TimePicker(this);
+        final TimePicker timePicker = new TimePicker(this);
         timePicker.setCurrentHour(User.getInstance().getStartTimeHour());
         timePicker.setCurrentMinute(User.getInstance().getStartTimeMin());
 
@@ -44,6 +48,15 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
         setButton.setText("Set");
         setButton.setTextSize(60);
         setButton.setElevation(20);
+        setButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                User.getInstance().setStartTime(timePicker.getCurrentHour(),
+                        timePicker.getCurrentMinute());
+            }
+        });
 
         ll = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 0, 20);
         ll.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
@@ -78,5 +91,21 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        File filesDir = getFilesDir();
+        SavingAndLoading.SaveState(filesDir);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        File filesDir = getFilesDir();
+        SavingAndLoading.LoadState(filesDir);
     }
 }

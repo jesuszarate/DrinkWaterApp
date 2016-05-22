@@ -12,7 +12,7 @@ import java.util.Stack;
 public class User
 {
     private String _name;
-    private double _weight = 130;
+    private double _weight = 145;
     private double _height = 0;
     private double TotalWaterConsumptionFill = 0;
     private double TotalWaterConsumption = 0;
@@ -22,8 +22,8 @@ public class User
     private int reminderTime = 15; // In minutes
     private int totalWaterNeeded = 64;
     private int _cupsConsumed = 0;
-    private int _startTimeHour = 0;
-    private int _startTimeMin = 0;
+    private int _startTimeHour = 10;
+    private int _startTimeMin = 10;
     private String _startTimeMeridiem = "am";
     private int _endTimeHour = 0;
     private int _endTimeMin = 0;
@@ -283,6 +283,12 @@ public class User
         this.measurementUnit = measurementUnit;
     }
 
+    public void setStartTime(int hour, int minutes){
+        this._startTimeMeridiem = hour < 12 ? "AM" : "PM";
+        this._startTimeHour = hour > 12 ? hour - 12 : hour;
+        this._startTimeMin = minutes;
+    }
+
     public int getStartTimeHour()
     {
         return _startTimeHour;
@@ -291,6 +297,23 @@ public class User
     public int getStartTimeMin()
     {
         return _startTimeMin;
+    }
+
+    public String getStartTimeMinString()
+    {
+        return minsToString(this._startTimeMin);
+    }
+
+    public String minsToString(int minutes)
+    {
+        // If the number of digits in the minutes is 1 then add the leading 0
+        if(Math.log10(minutes) < 2){
+            StringBuilder sb = new StringBuilder()
+                    .append("0")
+                    .append(minutes);
+            return sb.toString();
+        }
+        return minutes + "";
     }
 
     public String getStartTimeMeridiem()
@@ -307,6 +330,12 @@ public class User
     {
         return _endTimeMin;
     }
+
+    public String getEndTimeMinString()
+    {
+        return minsToString(this._endTimeMin);
+    }
+
 
     public String getEndTimeMeridiem()
     {

@@ -140,7 +140,15 @@ public class SettingsActivity extends Activity
         RoundButton startTimeButton = new RoundButton(this);
         startTimeButton.setPadding(20,20,20,20);
         startTimeButton.setElevation(20);
-        startTimeButton.setText("12:00\na.m."); // TODO: Hook this button up to the start time given by the time setting activity
+
+        StringBuilder time = new StringBuilder()
+                .append(User.getInstance().getStartTimeHour())
+                .append(":")
+                .append(User.getInstance().getStartTimeMinString())
+                .append("\n")
+                .append(User.getInstance().getStartTimeMeridiem());
+
+        startTimeButton.setText(time.toString());
 
         startTimeButton.setOnClickListener(new View.OnClickListener()
         {
@@ -162,7 +170,26 @@ public class SettingsActivity extends Activity
         RoundButton endTimeButton = new RoundButton(this);
         endTimeButton.setPadding(20,20,20,20);
         endTimeButton.setElevation(20);
-        endTimeButton.setText("12:00\na.m."); // TODO: Hook this button up to the start time given by the time setting activity
+
+        time = new StringBuilder()
+                .append(User.getInstance().getEndTimeHour())
+                .append(":")
+                .append(User.getInstance().getEndTimeMinString())
+                .append("\n")
+                .append(User.getInstance().getEndTimeMeridiem());
+
+        endTimeButton.setText(time.toString());
+
+        startTimeButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
+                startActivity(seTimeIntent);
+                Log.d("here", "here");
+            }
+        });
 
         params = new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1);
