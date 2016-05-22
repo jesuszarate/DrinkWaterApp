@@ -11,6 +11,33 @@ import java.util.Stack;
  */
 public class User
 {
+    private String _name;
+    private double _weight = 130;
+    private double _height = 0;
+    private double TotalWaterConsumptionFill = 0;
+    private double TotalWaterConsumption = 0;
+    private double TotalWaterPercentage = 0;
+    private double RemainingWaterConsumption = 0;
+    private double _percentagePortion = 0;
+    private int reminderTime = 15; // In minutes
+    private int totalWaterNeeded = 64;
+    private int _cupsConsumed = 0;
+    private int _startTimeHour = 0;
+    private int _startTimeMin = 0;
+    private String _startTimeMeridiem = "am";
+    private int _endTimeHour = 0;
+    private int _endTimeMin = 0;
+    private String _endTimeMeridiem = "am";
+
+
+    private Stack<Double> TotalWaterConsumptionStack = new Stack<>();
+    private Stack<Double> TotalWaterPercentageStack = new Stack<>();
+    private Stack<Double> PortionStack = new Stack<>();
+
+    private int cupSize = 20;
+    private MeasurementUnits measurementUnit;
+
+
     private static User _instance = null;
 
     public static User getInstance()
@@ -49,24 +76,7 @@ public class User
         }
     };
 
-    private String _name;
-    private double _weight = 130;
-    private double _height = 0;
-    private double TotalWaterConsumptionFill = 0;
-    private double TotalWaterConsumption = 0;
-    private double TotalWaterPercentage = 0;
-    private double RemainingWaterConsumption = 0;
-    private double _percentagePortion = 0;
-    private int reminderTime = 15; // In minutes
-    private int totalWaterNeeded = 64;
-    private int _cupsConsumed = 0;
 
-    private Stack<Double> TotalWaterConsumptionStack = new Stack<>();
-    private Stack<Double> TotalWaterPercentageStack = new Stack<>();
-    private Stack<Double> PortionStack = new Stack<>();
-
-    private int cupSize = 20;
-    private MeasurementUnits measurementUnit;
 
     private enum MeasurementUnits
     {
@@ -271,5 +281,35 @@ public class User
     public void setMeasurementUnit(MeasurementUnits measurementUnit)
     {
         this.measurementUnit = measurementUnit;
+    }
+
+    public int getStartTimeHour()
+    {
+        return _startTimeHour;
+    }
+
+    public int getStartTimeMin()
+    {
+        return _startTimeMin;
+    }
+
+    public String getStartTimeMeridiem()
+    {
+        return _startTimeMeridiem;
+    }
+
+    public int getEndTimeHour()
+    {
+        return _endTimeHour;
+    }
+
+    public int getEndTimeMin()
+    {
+        return _endTimeMin;
+    }
+
+    public String getEndTimeMeridiem()
+    {
+        return _endTimeMeridiem;
     }
 }

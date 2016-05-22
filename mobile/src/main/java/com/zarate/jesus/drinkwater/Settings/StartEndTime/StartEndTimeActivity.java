@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.zarate.jesus.drinkwater.CustomButtons.RoundButton;
 import com.zarate.jesus.drinkwater.R;
+import com.zarate.jesus.drinkwater.User;
 
 public class StartEndTimeActivity extends Activity//ActionBarActivity
 {
@@ -29,7 +31,8 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
 
 
         TimePicker timePicker = new TimePicker(this);
-
+        timePicker.setCurrentHour(User.getInstance().getStartTimeHour());
+        timePicker.setCurrentMinute(User.getInstance().getStartTimeMin());
 
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 0, 80);
         ll.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
