@@ -35,6 +35,8 @@ import java.util.HashMap;
  */
 public class SettingsActivity extends Activity
 {
+    public final static int START_TIME_REQUEST_CODE = 13;
+
     EditText weightInput;
     TextView totalWaterNeeded;
     EditText waterNeededInput;
@@ -187,6 +189,7 @@ public class SettingsActivity extends Activity
             {
                 Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
                 startActivity(seTimeIntent);
+                startActivityForResult(seTimeIntent, START_TIME_REQUEST_CODE);
                 Log.d("here", "here");
             }
         });
