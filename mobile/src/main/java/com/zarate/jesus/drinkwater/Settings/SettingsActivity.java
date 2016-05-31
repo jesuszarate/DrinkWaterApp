@@ -50,6 +50,9 @@ public class SettingsActivity extends Activity
         TransparentLinearLayout rootLayout = new TransparentLinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
 
+        rootLayout.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+        rootLayout.setFocusableInTouchMode(true);
+
         LinearLayout emptySlot = new LinearLayout(this);
 
         // User's weight
@@ -61,6 +64,7 @@ public class SettingsActivity extends Activity
         weightInput = new EditText(this);
         weightInput.setText((int)User.getInstance().getWeight() + "");
         weightInput.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        //weightInput.setFocusable(false);
         weightInput.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
