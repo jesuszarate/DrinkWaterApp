@@ -163,7 +163,6 @@ public class SettingsActivity extends Activity
             {
                 Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
                 startActivity(seTimeIntent);
-                Log.d("here", "here");
             }
         });
 
@@ -191,10 +190,9 @@ public class SettingsActivity extends Activity
             @Override
             public void onClick(View v)
             {
-                Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
-                startActivity(seTimeIntent);
-                startActivityForResult(seTimeIntent, START_TIME_REQUEST_CODE);
-                Log.d("here", "here");
+                Intent setTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
+                startActivity(setTimeIntent);
+                startActivityForResult(setTimeIntent, START_TIME_REQUEST_CODE);
             }
         });
 
@@ -336,6 +334,17 @@ public class SettingsActivity extends Activity
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 10));
 
         setContentView(rootLayout);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == START_TIME_REQUEST_CODE){
+                Toast.makeText(this, "start time", Toast.LENGTH_SHORT);
+            }
+        }
     }
 
     @Override
