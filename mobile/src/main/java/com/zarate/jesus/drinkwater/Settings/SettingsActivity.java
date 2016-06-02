@@ -342,7 +342,7 @@ public class SettingsActivity extends Activity
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == START_TIME_REQUEST_CODE){
-                Toast.makeText(this, "start time", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "start time", Toast.LENGTH_SHORT).show();
             }
         }
     }

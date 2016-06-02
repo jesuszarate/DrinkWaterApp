@@ -2,6 +2,7 @@ package com.zarate.jesus.drinkwater.Settings.StartEndTime;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -55,6 +56,8 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
             {
                 User.getInstance().setStartTime(timePicker.getCurrentHour(),
                         timePicker.getCurrentMinute());
+                setResult(Activity.RESULT_OK, new Intent());
+                finish();
             }
         });
 
