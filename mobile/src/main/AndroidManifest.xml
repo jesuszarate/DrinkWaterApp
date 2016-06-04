@@ -38,7 +38,8 @@
         </activity>
         <activity
             android:name=".Settings.StartEndTime.StartEndTimeActivity"
-            android:label="@string/title_activity_start_end_time" >
+            android:label="@string/title_activity_start_end_time"
+            android:launchMode = "singleInstance">
         </activity>
     </application>
 

@@ -161,8 +161,8 @@ public class SettingsActivity extends Activity
             @Override
             public void onClick(View v)
             {
-                Intent seTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
-                startActivity(seTimeIntent);
+                Intent setTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
+                startActivity(setTimeIntent);
             }
         });
 
@@ -170,6 +170,7 @@ public class SettingsActivity extends Activity
         startTimeSection.addView(startTimeButton, params);
 
 
+        // End time section
         LinearLayout endTimeSection = new LinearLayout(this);
 
         RoundButton endTimeButton = new RoundButton(this);
