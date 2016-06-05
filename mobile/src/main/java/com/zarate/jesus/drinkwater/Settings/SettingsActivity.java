@@ -36,6 +36,7 @@ import java.util.HashMap;
 public class SettingsActivity extends Activity
 {
     public final static int START_TIME_REQUEST_CODE = 13;
+    public final static int END_TIME_REQUEST_CODE = 14;
 
     EditText weightInput;
     TextView totalWaterNeeded;
@@ -162,7 +163,8 @@ public class SettingsActivity extends Activity
             public void onClick(View v)
             {
                 Intent setTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
-                startActivity(setTimeIntent);
+                setTimeIntent.putExtra("caller", "start");
+                startActivityForResult(setTimeIntent, START_TIME_REQUEST_CODE);
             }
         });
 
@@ -186,14 +188,14 @@ public class SettingsActivity extends Activity
 
         endTimeButton.setText(time.toString());
 
-        startTimeButton.setOnClickListener(new View.OnClickListener()
+        endTimeButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 Intent setTimeIntent = new Intent(SettingsActivity.this, StartEndTimeActivity.class);
-                startActivity(setTimeIntent);
-                startActivityForResult(setTimeIntent, START_TIME_REQUEST_CODE);
+                setTimeIntent.putExtra("caller", "end");
+                startActivityForResult(setTimeIntent, END_TIME_REQUEST_CODE);
             }
         });
 
@@ -344,6 +346,9 @@ public class SettingsActivity extends Activity
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == START_TIME_REQUEST_CODE){
                 Toast.makeText(this, "start time", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "end time", Toast.LENGTH_SHORT).show();
             }
         }
     }

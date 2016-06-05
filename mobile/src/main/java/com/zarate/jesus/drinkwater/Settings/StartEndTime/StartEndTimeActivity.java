@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +44,9 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
         ll.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
         rootLayout.addView(timePicker, ll);
 
+        String an = getCallingActivity().toShortString();
 
+        Log.d("whatever", an);
         LinearLayout buttonLayout = new LinearLayout(this);
         RoundButton setButton = new RoundButton(this);
         setButton.setText("Set");
@@ -54,6 +57,7 @@ public class StartEndTimeActivity extends Activity//ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                String what = getIntent().getStringExtra("caller");
                 User.getInstance().setStartTime(timePicker.getCurrentHour(),
                         timePicker.getCurrentMinute());
                 setResult(Activity.RESULT_OK, new Intent());
